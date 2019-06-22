@@ -1,0 +1,763 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>调用 myActiviti 提供的微服务 | myActiviti cook book</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="limeng32">
+    
+
+    
+    <meta name="description" content="本章内容向您讲解如何调用 myActiviti 提供的微服务。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="调用 myActiviti 提供的微服务">
+<meta property="og:url" content="http://yoursite.com/2017/12/04/2017-12-04-调用 myActiviti 提供的微服务/index.html">
+<meta property="og:site_name" content="myActiviti cook book">
+<meta property="og:description" content="本章内容向您讲解如何调用 myActiviti 提供的微服务。">
+<meta property="og:image" content="http://yoursite.com/2017/12/04/2017-12-04-调用%20myActiviti%20提供的微服务/soft_end.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/04/2017-12-04-调用%20myActiviti%20提供的微服务/message_end.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/04/2017-12-04-调用%20myActiviti%20提供的微服务/message_config.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/04/2017-12-04-调用%20myActiviti%20提供的微服务/message_end_input2.png">
+<meta property="og:updated_time" content="2018-12-23T14:48:40.261Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="调用 myActiviti 提供的微服务">
+<meta name="twitter:description" content="本章内容向您讲解如何调用 myActiviti 提供的微服务。">
+<meta name="twitter:image" content="http://yoursite.com/2017/12/04/2017-12-04-调用%20myActiviti%20提供的微服务/soft_end.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="myActiviti cook book" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="myActiviti cook book">myActiviti cook book</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/12/04/2017-12-04-调用 myActiviti 提供的微服务/" title="调用 myActiviti 提供的微服务" itemprop="url">调用 myActiviti 提供的微服务</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="limeng32" target="_blank" itemprop="author">limeng32</a>
+		
+  <p class="article-time">
+    <time datetime="2017-12-03T16:00:00.000Z" itemprop="datePublished"> Published 2017-12-04</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#开始与流转"><span class="toc-text"><a href="#&#x5F00;&#x59CB;&#x4E0E;&#x6D41;&#x8F6C;" class="headerlink" title="&#x5F00;&#x59CB;&#x4E0E;&#x6D41;&#x8F6C;"></a><a href="#&#x5F00;&#x59CB;&#x4E0E;&#x6D41;&#x8F6C;">&#x5F00;&#x59CB;&#x4E0E;&#x6D41;&#x8F6C;</a></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#开始（begin）"><span class="toc-text"><a href="#&#x5F00;&#x59CB;&#xFF08;begin&#xFF09;" class="headerlink" title="&#x5F00;&#x59CB;&#xFF08;begin&#xFF09;"></a><a href="#&#x5F00;&#x59CB;&#xFF08;begin&#xFF09;">&#x5F00;&#x59CB;&#xFF08;begin&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流转（complete）"><span class="toc-text"><a href="#&#x6D41;&#x8F6C;&#xFF08;complete&#xFF09;" class="headerlink" title="&#x6D41;&#x8F6C;&#xFF08;complete&#xFF09;"></a><a href="#&#x6D41;&#x8F6C;&#xFF08;complete&#xFF09;">&#x6D41;&#x8F6C;&#xFF08;complete&#xFF09;</a></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#挂起、恢复与终止"><span class="toc-text"><a href="#&#x6302;&#x8D77;&#x3001;&#x6062;&#x590D;&#x4E0E;&#x7EC8;&#x6B62;" class="headerlink" title="&#x6302;&#x8D77;&#x3001;&#x6062;&#x590D;&#x4E0E;&#x7EC8;&#x6B62;"></a><a href="#&#x6302;&#x8D77;&#x3001;&#x6062;&#x590D;&#x4E0E;&#x7EC8;&#x6B62;">&#x6302;&#x8D77;&#x3001;&#x6062;&#x590D;&#x4E0E;&#x7EC8;&#x6B62;</a></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#挂起（suspend）"><span class="toc-text"><a href="#&#x6302;&#x8D77;&#xFF08;suspend&#xFF09;" class="headerlink" title="&#x6302;&#x8D77;&#xFF08;suspend&#xFF09;"></a><a href="#&#x6302;&#x8D77;&#xFF08;suspend&#xFF09;">&#x6302;&#x8D77;&#xFF08;suspend&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#恢复（activate）"><span class="toc-text"><a href="#&#x6062;&#x590D;&#xFF08;activate&#xFF09;" class="headerlink" title="&#x6062;&#x590D;&#xFF08;activate&#xFF09;"></a><a href="#&#x6062;&#x590D;&#xFF08;activate&#xFF09;">&#x6062;&#x590D;&#xFF08;activate&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#终止（terminate）"><span class="toc-text"><a href="#&#x7EC8;&#x6B62;&#xFF08;terminate&#xFF09;" class="headerlink" title="&#x7EC8;&#x6B62;&#xFF08;terminate&#xFF09;"></a><a href="#&#x7EC8;&#x6B62;&#xFF08;terminate&#xFF09;">&#x7EC8;&#x6B62;&#xFF08;terminate&#xFF09;</a></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#签收、取消签收与撤回"><span class="toc-text"><a href="#&#x7B7E;&#x6536;&#x3001;&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#x4E0E;&#x64A4;&#x56DE;" class="headerlink" title="&#x7B7E;&#x6536;&#x3001;&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#x4E0E;&#x64A4;&#x56DE;"></a><a href="#&#x7B7E;&#x6536;&#x3001;&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#x4E0E;&#x64A4;&#x56DE;">&#x7B7E;&#x6536;&#x3001;&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#x4E0E;&#x64A4;&#x56DE;</a></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#签收（receipt）"><span class="toc-text"><a href="#&#x7B7E;&#x6536;&#xFF08;receipt&#xFF09;" class="headerlink" title="&#x7B7E;&#x6536;&#xFF08;receipt&#xFF09;"></a><a href="#&#x7B7E;&#x6536;&#xFF08;receipt&#xFF09;">&#x7B7E;&#x6536;&#xFF08;receipt&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#取消签收（unreceipt）"><span class="toc-text"><a href="#&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#xFF08;unreceipt&#xFF09;" class="headerlink" title="&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#xFF08;unreceipt&#xFF09;"></a><a href="#&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#xFF08;unreceipt&#xFF09;">&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#xFF08;unreceipt&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#撤回（withdraw）"><span class="toc-text"><a href="#&#x64A4;&#x56DE;&#xFF08;withdraw&#xFF09;" class="headerlink" title="&#x64A4;&#x56DE;&#xFF08;withdraw&#xFF09;"></a><a href="#&#x64A4;&#x56DE;&#xFF08;withdraw&#xFF09;">&#x64A4;&#x56DE;&#xFF08;withdraw&#xFF09;</a></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#软结束与消息事件"><span class="toc-text"><a href="#&#x8F6F;&#x7ED3;&#x675F;&#x4E0E;&#x6D88;&#x606F;&#x4E8B;&#x4EF6;" class="headerlink" title="&#x8F6F;&#x7ED3;&#x675F;&#x4E0E;&#x6D88;&#x606F;&#x4E8B;&#x4EF6;"></a><a href="#&#x8F6F;&#x7ED3;&#x675F;&#x4E0E;&#x6D88;&#x606F;&#x4E8B;&#x4EF6;">&#x8F6F;&#x7ED3;&#x675F;&#x4E0E;&#x6D88;&#x606F;&#x4E8B;&#x4EF6;</a></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#软结束标志"><span class="toc-text"><a href="#&#x8F6F;&#x7ED3;&#x675F;&#x6807;&#x5FD7;" class="headerlink" title="&#x8F6F;&#x7ED3;&#x675F;&#x6807;&#x5FD7;"></a><a href="#&#x8F6F;&#x7ED3;&#x675F;&#x6807;&#x5FD7;">&#x8F6F;&#x7ED3;&#x675F;&#x6807;&#x5FD7;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#消息触发事件（message）"><span class="toc-text"><a href="#&#x6D88;&#x606F;&#x89E6;&#x53D1;&#x4E8B;&#x4EF6;&#xFF08;message&#xFF09;" class="headerlink" title="&#x6D88;&#x606F;&#x89E6;&#x53D1;&#x4E8B;&#x4EF6;&#xFF08;message&#xFF09;"></a><a href="#&#x6D88;&#x606F;&#x89E6;&#x53D1;&#x4E8B;&#x4EF6;&#xFF08;message&#xFF09;">&#x6D88;&#x606F;&#x89E6;&#x53D1;&#x4E8B;&#x4EF6;&#xFF08;message&#xFF09;</a></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#历史遗留"><span class="toc-text"><a href="#&#x5386;&#x53F2;&#x9057;&#x7559;" class="headerlink" title="&#x5386;&#x53F2;&#x9057;&#x7559;"></a><a href="#&#x5386;&#x53F2;&#x9057;&#x7559;">&#x5386;&#x53F2;&#x9057;&#x7559;</a></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#流转（flow）"><span class="toc-text"><a href="#&#x6D41;&#x8F6C;&#xFF08;flow&#xFF09;" class="headerlink" title="&#x6D41;&#x8F6C;&#xFF08;flow&#xFF09;"></a><a href="#&#x6D41;&#x8F6C;&#xFF08;flow&#xFF09;">&#x6D41;&#x8F6C;&#xFF08;flow&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#仅仅开始（justStart）"><span class="toc-text"><a href="#&#x4EC5;&#x4EC5;&#x5F00;&#x59CB;&#xFF08;justStart&#xFF09;" class="headerlink" title="&#x4EC5;&#x4EC5;&#x5F00;&#x59CB;&#xFF08;justStart&#xFF09;"></a><a href="#&#x4EC5;&#x4EC5;&#x5F00;&#x59CB;&#xFF08;justStart&#xFF09;">&#x4EC5;&#x4EC5;&#x5F00;&#x59CB;&#xFF08;justStart&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开始（start）"><span class="toc-text"><a href="#&#x5F00;&#x59CB;&#xFF08;start&#xFF09;" class="headerlink" title="&#x5F00;&#x59CB;&#xFF08;start&#xFF09;"></a><a href="#&#x5F00;&#x59CB;&#xFF08;start&#xFF09;">&#x5F00;&#x59CB;&#xFF08;start&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动（move）"><span class="toc-text"><a href="#&#x79FB;&#x52A8;&#xFF08;move&#xFF09;" class="headerlink" title="&#x79FB;&#x52A8;&#xFF08;move&#xFF09;"></a><a href="#&#x79FB;&#x52A8;&#xFF08;move&#xFF09;">&#x79FB;&#x52A8;&#xFF08;move&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开始并移动（startMove）"><span class="toc-text"><a href="#&#x5F00;&#x59CB;&#x5E76;&#x79FB;&#x52A8;&#xFF08;startMove&#xFF09;" class="headerlink" title="&#x5F00;&#x59CB;&#x5E76;&#x79FB;&#x52A8;&#xFF08;startMove&#xFF09;"></a><a href="#&#x5F00;&#x59CB;&#x5E76;&#x6D41;&#x8F6C;&#xFF08;startMove&#xFF09;">&#x5F00;&#x59CB;&#x5E76;&#x79FB;&#x52A8;&#xFF08;startMove&#xFF09;</a></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text"><a href="#&#x603B;&#x7ED3;" class="headerlink" title="&#x603B;&#x7ED3;"></a><a href="#&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</a></span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="开始与流转"><a href="#开始与流转" class="headerlink" title="开始与流转"></a><a href="#开始与流转">开始与流转</a></h2><h3 id="开始（begin）"><a href="#开始（begin）" class="headerlink" title="开始（begin）"></a><a href="#开始（begin）">开始（begin）</a></h3><p><code>begin</code> 方法用于开始流程，它的 api 格式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./wfservice/begin?businessId=$&#123;您要启动的业务ID&#125;</span><br><span class="line">                     &amp;form=&#123;$&#123;所有环节参与变量&#125;&#125;</span><br><span class="line">                     &amp;listener=&#123;$&#123;所有监听器参与变量&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>其中 <code>businessId</code> 是必填项，它描述您想启动哪个业务的流程（myActiviti 中每个流程都对应唯一且不重复的业务），<code>form</code> 和 <code>listener</code> 为选填项。一个典型的 begin 方法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./wfservice/begin?businessId=business2</span><br><span class="line">                 &amp;form=&#123;myVariable1:<span class="string">'mv'</span>&#125;</span><br><span class="line">                 &amp;listener=&#123;myListener1:&#123;myListener1Variable1:<span class="string">'mlv'</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>这个方法的返回结果形如：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"DataRows"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"actId"</span>: <span class="string">"drafter"</span>,</span><br><span class="line">            <span class="attr">"actName"</span>: <span class="string">"起草"</span>,</span><br><span class="line">            <span class="attr">"actRole"</span>: [</span><br><span class="line">                <span class="string">"projectManager"</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">"exeId"</span>: <span class="string">"40013"</span>,</span><br><span class="line">            <span class="attr">"isEnd"</span>: <span class="string">"0"</span>,</span><br><span class="line">            <span class="attr">"procInstId"</span>: <span class="string">"40013"</span>,</span><br><span class="line">            <span class="attr">"taskId"</span>: <span class="string">"40016"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"RetCode"</span>: <span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"RetVal"</span>: <span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"isEnd"</span>: <span class="string">"0"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>说明如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>RetCode</code></td>
+<td style="text-align:left">可能的返回值“0/1/2”，0 代表工作流发生问题，1 代表正常返回且业务逻辑正常，2 代表正常返回但业务逻辑异常</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>RetVal</code></td>
+<td style="text-align:left">对返回情况的进一步描述，当 RetCode 为 0 或 2 时这里会给出详细信息</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>isEnd</code></td>
+<td style="text-align:left">可能的返回值“0/1”，0 代表主流程未结束，1代表流程已结束。出现在 <code>DataRows</code> 中则表示分支流程的结束情况</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>DataRows</code></td>
+<td style="text-align:left">展示当前所有分支流程信息的数组</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>actId</code></td>
+<td style="text-align:left">只出现在 <code>DataRows</code> 中，显示流程图中此环节 ID</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>actName</code></td>
+<td style="text-align:left">只出现在 <code>DataRows</code> 中，显示流程图中此环节名称</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>actRole</code></td>
+<td style="text-align:left">只出现在 <code>DataRows</code> 中，显示流程图中此可以处理此环节的角色（数组）</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>procInstId</code></td>
+<td style="text-align:left">只出现在 <code>DataRows</code> 中，显示此次流程实例的 ID</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>exeId</code></td>
+<td style="text-align:left">只出现在 <code>DataRows</code> 中，显示此次流程实例的执行变量的 ID</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>taskId</code></td>
+<td style="text-align:left">只出现在 <code>DataRows</code> 中，显示此次流程实例的任务变量的 ID</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>对 myActiviti 来说，主流程中的分支流程（<code>DataRows</code> 中的内容）永远存在，只不过普通情况下分支流程只有一个，而并行处理情况下分支流程会有多个。</p>
+</li>
+<li><p><code>taskId</code> 是业务系统在返回后需要用到的数据，它是业务系统下一次调用“流转”等操作的必要输入参数。</p>
+</li>
+<li><p><code>exeId</code> 是业务系统在返回后用于参考的数据，大多数情况下一个流程实例中 exeId 不会改变，除非出现并行网关。</p>
+</li>
+<li><p><code>procInstId</code> 是一个流程实例中确定不会改变的数据，它可以唯一标识这个流程实例，大多数情况下 <code>exeId</code> 与它相同，但出现并行分支时 <code>exeId</code> 会不同于它。</p>
+</li>
+<li><p><code>procInstId</code>、<code>exeId</code> 和 <code>taskId</code> 的区别是，一个流程实例的 <code>procInstId</code> 永远不变，大多数情况下 <code>exeId</code> 也不会变，但 <code>taskId</code> 永远都在改变。</p>
+</li>
+<li><p>关于监听器的更多信息请参阅下一章</p>
+</li>
+</ul>
+<p>以上就是 <code>begin</code> 操作的全部内容，业务系统调用并获得返回数据后可以按自己的需要使用这些信息。</p>
+<h3 id="流转（complete）"><a href="#流转（complete）" class="headerlink" title="流转（complete）"></a><a href="#流转（complete）">流转（complete）</a></h3><p><code>complete</code> 是我们推荐使用的流转方式，这种方式采用 <code>taskId</code> 作为流转关键参数，如前面所提 <code>taskId</code> 的特点是每次流转后都会改变，使用它作为关键参数可以实现明确指定当前环节（正在流转的环节）和避免多次抖动提交造成过度流转（流转到预期之外的环节）的需求。起草环节的流转 api 格式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">./wfservice/complete?taskId=<span class="number">40016</span></span><br><span class="line">                &amp;assignee=ZhangSan</span><br><span class="line">                &amp;form=&#123;$&#123;所有环节参与变量&#125;&#125;</span><br><span class="line">                &amp;listener=&#123;$&#123;所有监听器参与变量&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>其中，<code>taskId</code>（任务 Id）是必填项，<code>assignee</code>（环节参与者）、<code>form</code>（环节参与变量）和 <code>listener</code>（监听器参与变量）是选填项，同样如果待流转的环节含有条件序列流，在发起 /complete 请求时必须包含可以执行条件判断的所有变量（封装于 <code>form</code> 中）。比如我们在上一章设计的流程图中起草环节有可能进行如下判断：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">序列流指向</th>
+<th style="text-align:left">序列流条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>总院TMO审核</code></td>
+<td style="text-align:left">${endApply == false &amp;&amp; nextOU == “M”}</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>A分院TMO审核</code></td>
+<td style="text-align:left">${endApply == false &amp;&amp; nextOU == “A”}</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>B分院TMO审核</code></td>
+<td style="text-align:left">${endApply == false &amp;&amp; nextOU == “B”}</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>结束环节</code></td>
+<td style="text-align:left">${endApply == true}</td>
+</tr>
+</tbody>
+</table>
+<p>因此在发起这个环节的流转请求时我们或者给出 <code>endApply</code> 为 false 和 <code>nextOU</code> 的值；或者给出 <code>endApply</code> 为 true（此时可以不提供 <code>nextOU</code> 的值）。具体赋值的格式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">form=&#123;endApply:<span class="keyword">false</span>, nextOU:<span class="string">"M"</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>这个方法的返回结果形如：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"DataRows"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"actId"</span>: <span class="string">"tmoCheak"</span>,</span><br><span class="line">            <span class="attr">"actName"</span>: <span class="string">"总院TMO审核"</span>,</span><br><span class="line">            <span class="attr">"actRole"</span>: [</span><br><span class="line">                <span class="string">"tmo"</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">"exeId"</span>: <span class="string">"40013"</span>,</span><br><span class="line">            <span class="attr">"isEnd"</span>: <span class="string">"0"</span>,</span><br><span class="line">            <span class="attr">"procInstId"</span>: <span class="string">"40013"</span>,</span><br><span class="line">            <span class="attr">"taskId"</span>: <span class="string">"40028"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"RetCode"</span>: <span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"RetVal"</span>: <span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"isEnd"</span>: <span class="string">"0"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>内容格式和上一小节 <code>begin</code> 返回的内容格式相同，值得注意的是，这次返回的是流程图中起草的后一个环节。</p>
+<p>“form” 中传入的变量称为环节参与变量，这些变量都是局部变量即仅在当前环节有效，当前环节结束后就无法访问。如果您需要一个长期有效的变量，可以在环节参与变量名前加“$”,如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">form=&#123;$endApply:<span class="keyword">false</span>, $nextOU:<span class="string">"M"</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>这样环节参与变量“endApply”和“nextOU”就会在流程实例生命周期中一直有效，它的意义在“监听器”一章可以看到。</p>
+<h2 id="挂起、恢复与终止"><a href="#挂起、恢复与终止" class="headerlink" title="挂起、恢复与终止"></a><a href="#挂起、恢复与终止">挂起、恢复与终止</a></h2><h3 id="挂起（suspend）"><a href="#挂起（suspend）" class="headerlink" title="挂起（suspend）"></a><a href="#挂起（suspend）">挂起（suspend）</a></h3><p>挂起是一种暂停某一流程实例流转的方法，它的 api 格式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./wfservice/suspend?procInstId=$&#123;希望挂起的流程实例的ID&#125;</span><br></pre></td></tr></table></figure>
+<p>其中 <code>procInstId</code> 是必填项。挂起后返回结果 json 中只需要看两个属性：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>RetCode</code></td>
+<td style="text-align:left">可能的返回值“0/1/2”，0 代表工作流发生问题，1 代表正常返回且业务逻辑正常，2 代表正常返回但业务逻辑异常</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>RetVal</code></td>
+<td style="text-align:left">对返回情况的进一步描述，当 RetCode 为 0 或 2 时这里会给出详细信息</td>
+</tr>
+</tbody>
+</table>
+<p>当挂起成功后，如果再流转这个流程实例，返回 json 如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"DataRows"</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">"RetCode"</span>: <span class="string">"2"</span>,</span><br><span class="line">    <span class="attr">"RetVal"</span>: <span class="string">"Cannot claim a suspended task"</span>,</span><br><span class="line">    <span class="attr">"isEnd"</span>: <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>也就是流转并没有成功。如果想让已挂起的流程实例再度流转，需要使用恢复方法。</p>
+<h3 id="恢复（activate）"><a href="#恢复（activate）" class="headerlink" title="恢复（activate）"></a><a href="#恢复（activate）">恢复（activate）</a></h3><p>操作是将已挂起流程实例恢复正常的方法，它的 api 格式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./wfservice/activate?procInstId=$&#123;希望恢复的流程实例的ID&#125;</span><br></pre></td></tr></table></figure>
+<p>其中 <code>procInstId</code> 是必填项。恢复后返回结果 json 中只需要看两个属性：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>RetCode</code></td>
+<td style="text-align:left">可能的返回值“0/1/2”，0 代表工作流发生问题，1 代表正常返回且业务逻辑正常，2 代表正常返回但业务逻辑异常</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>RetVal</code></td>
+<td style="text-align:left">对返回情况的进一步描述，当 RetCode 为 0 或 2 时这里会给出详细信息</td>
+</tr>
+</tbody>
+</table>
+<p>当恢复成功后，这个流程实例可以再次正常流转。</p>
+<h3 id="终止（terminate）"><a href="#终止（terminate）" class="headerlink" title="终止（terminate）"></a><a href="#终止（terminate）">终止（terminate）</a></h3><p>终止是将已启动的流程实例强制结束的方法，它的 api 格式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./wfservice/terminate?procInstId=$&#123;希望终止的流程实例的ID&#125;</span><br></pre></td></tr></table></figure>
+<p>其中 <code>procInstId</code> 是必填项。恢复后返回结果 json 中只需要看两个属性：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>RetCode</code></td>
+<td style="text-align:left">可能的返回值“0/1/2”，0 代表工作流发生问题，1 代表正常返回且业务逻辑正常，2 代表正常返回但业务逻辑异常</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>RetVal</code></td>
+<td style="text-align:left">对返回情况的进一步描述，当 RetCode 为 0 或 2 时这里会给出详细信息</td>
+</tr>
+</tbody>
+</table>
+<p>当终止成功后，此流程实例无法再被使用。</p>
+<h2 id="签收、取消签收与撤回"><a href="#签收、取消签收与撤回" class="headerlink" title="签收、取消签收与撤回"></a><a href="#签收、取消签收与撤回">签收、取消签收与撤回</a></h2><h3 id="签收（receipt）"><a href="#签收（receipt）" class="headerlink" title="签收（receipt）"></a><a href="#签收（receipt）">签收（receipt）</a></h3><p>签收是声明用户获取到任务的一个方法，它的 api 格式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./wfservice/receipt?exeId=$&#123;签收的流程实例的执行变量ID&#125;</span><br><span class="line">                   &amp;dealPerson=$&#123;参与者&#125;</span><br></pre></td></tr></table></figure>
+<p>其中，<code>exeId</code> 和 <code>dealPerson</code> 是必填项。签收成功后会显示该环节详细信息，同时这个任务无法再被其他人签收（除非执行在我们下一小节会介绍的取消签收方法）。</p>
+<p>签收的意义在于防止任务被撤回，未签收的任务可以被它的来源人撤回，但已签收的任务不能被撤回。最后，如果业务系统不使用签收操作也无妨，在流转时会自动执行签收操作。</p>
+<h3 id="取消签收（unreceipt）"><a href="#取消签收（unreceipt）" class="headerlink" title="取消签收（unreceipt）"></a><a href="#取消签收（unreceipt）">取消签收（unreceipt）</a></h3><p>取消签收是已签收任务的用户放弃签收的方法，它的 api 格式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./wfservice/unreceipt?exeId=$&#123;取消签收的流程实例的执行变量ID&#125;</span><br><span class="line">                   &amp;dealPerson=$&#123;参与者&#125;</span><br></pre></td></tr></table></figure>
+<p>其中，<code>exeId</code> 和 <code>dealPerson</code> 是必填项。取消签收成功后会显示该环节详细信息，同时这个任务进入无人认领状态，可以被其他用户进行签收，也可被它的来源人撤回。</p>
+<h3 id="撤回（withdraw）"><a href="#撤回（withdraw）" class="headerlink" title="撤回（withdraw）"></a><a href="#撤回（withdraw）">撤回（withdraw）</a></h3><p>撤回是任务的来源人将任务取回的方法，它的 api 格式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./wfservice/withdraw?taskId=$&#123;此任务前一环节的任务变量ID&#125;</span><br></pre></td></tr></table></figure>
+<p>其中 <code>taskId</code> 是必填项，撤回成功后会显示前一环节详细信息。撤回是一种异步方法，即不处于激活状态的环节发起的操作，所以撤回方需要提供当时保存的 <code>taskId</code>。如我们之前所说，<code>taskId</code> 是业务系统在每次流转返回后都需要自己保存的数据，即为异步方法调用之用。</p>
+<p>并且，撤回的成功还取决于两个条件：任务未被下一个参与者完成，也未被下一个参与者领取，这是符合业务流转的逻辑的。</p>
+<p>最后，撤回不具有回溯性，即如果 A 发任务给 B 然后 B 发任务给 C，如果 B 撤回后，A 无法把任务再撤回到自己这里。</p>
+<h2 id="软结束与消息事件"><a href="#软结束与消息事件" class="headerlink" title="软结束与消息事件"></a><a href="#软结束与消息事件">软结束与消息事件</a></h2><h3 id="软结束标志"><a href="#软结束标志" class="headerlink" title="软结束标志"></a><a href="#软结束标志">软结束标志</a></h3><p>在环节详细信息中，<code>isEnd</code> 标识此环节是不是当前流程的最后一个环节，这个规则既适用于主流程也是用于流程分支。但是，某些情况下用户的业务系统希望在一个非最后环节获得 <code>isEnd</code> 等于 1（结束）的效果，例如想让流程在这里“看上去”结束，在将来合适的时候再唤醒，就可以使用“软结束”来达到这个效果。</p>
+<p>myActiviti 实现软结束的方式很简单，只需要将某个环节的输入区的 <code>文档</code> 设为 “end” 即可，如下：</p>
+<img src="/2017/12/04/2017-12-04-调用%20myActiviti%20提供的微服务/soft_end.png">
+<p>这样，当流转到这个环节时返回的 <code>isEnd</code> 就是 1（但其它信息不会改变），您的业务系统可以通过这一点做特别的事情。</p>
+<h3 id="消息触发事件（message）"><a href="#消息触发事件（message）" class="headerlink" title="消息触发事件（message）"></a><a href="#消息触发事件（message）">消息触发事件（message）</a></h3><p>通过消息触发任务是 BPMN 标准中一个异步触发任务的手段，这种方式在使用上非常灵活，myActiviti 对此也增加了微服务调用支持。</p>
+<p>在流程图中画消息触发任务的方法很简单，将流程设计器左边树形菜单的 <code>边界事件-消息边界事件</code> 拖到一个用户任务上，就形成了消息触发任务。我们仍以立项流程图为例，现在将“结束环节”环节改为“软结束环节”，并在“软结束环节”上加一个消息触发事件来指向真正的结束环节，如下：</p>
+<img src="/2017/12/04/2017-12-04-调用%20myActiviti%20提供的微服务/message_end.png">
+<p>接下来我们配置这个消息触发事件的工作区。首先我们在流程图的全局工作区中增加一个消息名称，如下：</p>
+<img src="/2017/12/04/2017-12-04-调用%20myActiviti%20提供的微服务/message_config.png">
+<p>这里消息取名为 “finish”，实际可任意取名。然后消息触发事件配置如下（除 <code>消息名称</code> 外其它可任意设置）：</p>
+<img src="/2017/12/04/2017-12-04-调用%20myActiviti%20提供的微服务/message_end_input2.png">
+<p>这样，当业务系统流转到“软结束环节”时就会认为流程已经结束，而事实上流程却可以通过撤回“起死回生”，而这个流程想要真正结束的话，可以通过“触发消息”来实现。触发消息的 api 格式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./wfservice/message?exeId=$&#123;目标环节的流程实例的执行变量ID&#125;</span><br><span class="line">                   &amp;message=$&#123;触发的消息名称&#125;</span><br></pre></td></tr></table></figure>
+<p>具体到立项流程，如果 <code>message</code> 为 “finish”，则流程实例真正结束，返回如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"DataRows"</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">"RetCode"</span>: <span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"RetVal"</span>: <span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"isEnd"</span>: <span class="string">"1"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="历史遗留"><a href="#历史遗留" class="headerlink" title="历史遗留"></a><a href="#历史遗留">历史遗留</a></h2><p>以下 API 曾被开发，但经时间证明它们并非最佳实践因而不再推荐使用。这些 API 一直可用，但不会再增加特性，在此列出并建议使用了它们的用户尽快替换。</p>
+<h3 id="流转（flow）"><a href="#流转（flow）" class="headerlink" title="流转（flow）"></a><a href="#流转（flow）">流转（flow）</a></h3><p><code>flow</code> 是曾经的用于流转的 API ，使用 <code>exeId</code> 做为流转关键参数，它的格式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">./wfservice/flow?exeId=<span class="number">40013</span></span><br><span class="line">                &amp;dealRole=projectManager</span><br><span class="line">                &amp;dealPerson=ZhangSan</span><br><span class="line">                &amp;formData=&#123;form_data:&#123;endApply:<span class="keyword">false</span>, nextOU:<span class="string">"M"</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>其中，<code>exeId</code>（执行变量 Id）、<code>dealRole</code>（参与者角色）和  <code>dealPerson</code>（参与者）是必填项，<code>formData</code>（参与流转的流程变量）是选填项，但是如果待流转的环节含有条件序列流，在发起流转请求时必须包含可以执行条件判断的所有变量。比如我们在上一章设计的流程图中起草环节有可能进行如下判断：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">序列流指向</th>
+<th style="text-align:left">序列流条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>总院TMO审核</code></td>
+<td style="text-align:left">${endApply == false &amp;&amp; nextOU == “M”}</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>A分院TMO审核</code></td>
+<td style="text-align:left">${endApply == false &amp;&amp; nextOU == “A”}</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>B分院TMO审核</code></td>
+<td style="text-align:left">${endApply == false &amp;&amp; nextOU == “B”}</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>结束环节</code></td>
+<td style="text-align:left">${endApply == true}</td>
+</tr>
+</tbody>
+</table>
+<p>因此在发起这个环节的流转请求时我们或者给出 <code>endApply</code> 为 false 和 <code>nextOU</code> 的值；或者给出 <code>endApply</code> 为 true（此时可以不提供 <code>nextOU</code> 的值）。具体赋值的格式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">formData=&#123;form_data:&#123;endApply:<span class="keyword">false</span>, nextOU:<span class="string">"M"</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>这个方法的返回结果形如：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"DataRows"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"actId"</span>: <span class="string">"tmoCheak"</span>,</span><br><span class="line">            <span class="attr">"actName"</span>: <span class="string">"总院TMO审核"</span>,</span><br><span class="line">            <span class="attr">"actRole"</span>: [</span><br><span class="line">                <span class="string">"tmo"</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">"exeId"</span>: <span class="string">"40013"</span>,</span><br><span class="line">            <span class="attr">"isEnd"</span>: <span class="string">"0"</span>,</span><br><span class="line">            <span class="attr">"procInstId"</span>: <span class="string">"40013"</span>,</span><br><span class="line">            <span class="attr">"taskId"</span>: <span class="string">"40028"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"RetCode"</span>: <span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"RetVal"</span>: <span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"isEnd"</span>: <span class="string">"0"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>内容格式和上一小节 <code>justStart</code> 返回的内容格式相同，值得注意的是，这次返回的是流程图中起草的后一个环节。</p>
+<h3 id="仅仅开始（justStart）"><a href="#仅仅开始（justStart）" class="headerlink" title="仅仅开始（justStart）"></a><a href="#仅仅开始（justStart）">仅仅开始（justStart）</a></h3><p>在上一章中，我们使用 <code>justStart</code> 方法调用了流程，这个方法的中文名称是 “仅仅开始”，它的 api 格式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./wfservice/justStart?businessId=$&#123;您要启动的业务ID&#125;</span><br></pre></td></tr></table></figure>
+<p>其中 <code>businessId</code> 是必填项，它描述您想启动哪个业务的流程（myActiviti 中每个流程都对应唯一且不重复的业务）。这个方法的返回结果形如：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"DataRows"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"actId"</span>: <span class="string">"drafter"</span>,</span><br><span class="line">            <span class="attr">"actName"</span>: <span class="string">"起草"</span>,</span><br><span class="line">            <span class="attr">"actRole"</span>: [</span><br><span class="line">                <span class="string">"projectManager"</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">"exeId"</span>: <span class="string">"40013"</span>,</span><br><span class="line">            <span class="attr">"isEnd"</span>: <span class="string">"0"</span>,</span><br><span class="line">            <span class="attr">"procInstId"</span>: <span class="string">"40013"</span>,</span><br><span class="line">            <span class="attr">"taskId"</span>: <span class="string">"40016"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"RetCode"</span>: <span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"RetVal"</span>: <span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"isEnd"</span>: <span class="string">"0"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>说明如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>RetCode</code></td>
+<td style="text-align:left">可能的返回值“0/1/2”，0 代表工作流发生问题，1 代表正常返回且业务逻辑正常，2 代表正常返回但业务逻辑异常</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>RetVal</code></td>
+<td style="text-align:left">对返回情况的进一步描述，当 RetCode 为 0 或 2 时这里会给出详细信息</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>isEnd</code></td>
+<td style="text-align:left">可能的返回值“0/1”，0 代表主流程未结束，1代表流程已结束。出现在 <code>DataRows</code> 中则表示分支流程的结束情况</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>DataRows</code></td>
+<td style="text-align:left">展示当前所有分支流程信息的数组</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>actId</code></td>
+<td style="text-align:left">只出现在 <code>DataRows</code> 中，显示流程图中此环节 ID</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>actName</code></td>
+<td style="text-align:left">只出现在 <code>DataRows</code> 中，显示流程图中此环节名称</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>actRole</code></td>
+<td style="text-align:left">只出现在 <code>DataRows</code> 中，显示流程图中此可以处理此环节的角色（数组）</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>procInstId</code></td>
+<td style="text-align:left">只出现在 <code>DataRows</code> 中，显示此次流程实例的 ID</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>exeId</code></td>
+<td style="text-align:left">只出现在 <code>DataRows</code> 中，显示此次流程实例的执行变量的 ID</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>taskId</code></td>
+<td style="text-align:left">只出现在 <code>DataRows</code> 中，显示此次流程实例的任务变量的 ID</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>对 myActiviti 来说，主流程中的分支流程（<code>DataRows</code> 中的内容）永远存在，只不过普通情况下分支流程只有一个，而并行处理情况下分支流程会有多个。</p>
+</li>
+<li><p><code>exeId</code> 是业务系统在返回后需要用到的数据，它是业务系统下一次调用“流转”等操作的必要输入参数。</p>
+</li>
+<li><p><code>taskId</code> 是业务系统在返回后需要保存的数据，它是业务系统调用“撤回”等异步操作（即不处于激活状态的环节发起的操作）时必要的输入参数。</p>
+</li>
+<li><p><code>procInstId</code> 是一个流程实例中确定不会改变的数据，它可以唯一标识这个流程实例，大多数情况下 <code>exeId</code> 与它相同，但出现并行分支时 <code>exeId</code> 会不同于它。</p>
+</li>
+<li><p><code>procInstId</code>、<code>exeId</code> 和 <code>taskId</code> 的区别是，一个流程实例的 <code>procInstId</code> 永远不变，大多数情况下 <code>exeId</code> 也不会变，但 <code>taskId</code> 永远都在改变。</p>
+</li>
+</ul>
+<p>以上就是 <code>justStart</code> 操作的全部内容，业务系统调用并获得返回数据后可以按自己的需要使用这些信息。</p>
+<h3 id="开始（start）"><a href="#开始（start）" class="headerlink" title="开始（start）"></a><a href="#开始（start）">开始（start）</a></h3><p><code>start</code> 方法是曾经的用于开始流程并通过第一个环节的 API，可以看作是先 <code>justStart</code> 再 <code>flow</code>，它的 api 格式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">./wfservice/start?businessId=business2</span><br><span class="line">                &amp;dealRole=projectManager</span><br><span class="line">                &amp;dealPerson=ZhangSan</span><br><span class="line">                &amp;formData=&#123;form_data:&#123;endApply:<span class="keyword">false</span>, nextOU:<span class="string">"M"</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>其中，<code>businessId</code>（要启动的业务 Id）、<code>dealRole</code>（参与者角色）和  <code>dealPerson</code>（参与者）是必填项，<code>formData</code>（参与流转的流程变量）是选填项，但是如果待流转的环节含有条件序列流，在发起流转请求时必须包含可以执行条件判断的所有变量。它的返回和 <code>flow</code> 操作的返回是相同的。</p>
+<h3 id="移动（move）"><a href="#移动（move）" class="headerlink" title="移动（move）"></a><a href="#移动（move）">移动（move）</a></h3><p><code>move</code> 采用 <code>taskId</code> 作为流转关键参数，如前面所提 <code>taskId</code> 的特点是每次流转后都会改变，使用它作为关键参数可以实现明确指定当前环节（正在流转的环节）和避免多次抖动提交造成过度流转（流转到预期之外的环节）的需求。起草环节的流转 api 格式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./wfservice/move?taskId=<span class="number">40016</span></span><br><span class="line">                &amp;assignee=ZhangSan</span><br><span class="line">                &amp;formData=&#123;form_data:&#123;endApply:<span class="keyword">false</span>, nextOU:<span class="string">"M"</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>其中，<code>taskId</code>（任务 Id）是必填项，<code>assignee</code>（环节参与者）和 <code>formData</code>（参与流转的流程变量）是选填项，同样如果待流转的环节含有条件序列流，在发起 /move 请求时必须包含可以执行条件判断的所有变量（封装于 <code>formData</code> 下的 <code>form_data</code> 中）。比如我们在上一章设计的流程图中起草环节有可能进行如下判断：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">序列流指向</th>
+<th style="text-align:left">序列流条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>总院TMO审核</code></td>
+<td style="text-align:left">${endApply == false &amp;&amp; nextOU == “M”}</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>A分院TMO审核</code></td>
+<td style="text-align:left">${endApply == false &amp;&amp; nextOU == “A”}</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>B分院TMO审核</code></td>
+<td style="text-align:left">${endApply == false &amp;&amp; nextOU == “B”}</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>结束环节</code></td>
+<td style="text-align:left">${endApply == true}</td>
+</tr>
+</tbody>
+</table>
+<p>因此在发起这个环节的流转请求时我们或者给出 <code>endApply</code> 为 false 和 <code>nextOU</code> 的值；或者给出 <code>endApply</code> 为 true（此时可以不提供 <code>nextOU</code> 的值）。具体赋值的格式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">formData=&#123;form_data:&#123;endApply:<span class="keyword">false</span>, nextOU:<span class="string">"M"</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>这个方法的返回结果形如：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"DataRows"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"actId"</span>: <span class="string">"tmoCheak"</span>,</span><br><span class="line">            <span class="attr">"actName"</span>: <span class="string">"总院TMO审核"</span>,</span><br><span class="line">            <span class="attr">"actRole"</span>: [</span><br><span class="line">                <span class="string">"tmo"</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">"exeId"</span>: <span class="string">"40013"</span>,</span><br><span class="line">            <span class="attr">"isEnd"</span>: <span class="string">"0"</span>,</span><br><span class="line">            <span class="attr">"procInstId"</span>: <span class="string">"40013"</span>,</span><br><span class="line">            <span class="attr">"taskId"</span>: <span class="string">"40028"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"RetCode"</span>: <span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"RetVal"</span>: <span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"isEnd"</span>: <span class="string">"0"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>内容格式和上一小节 <code>justStart</code> 返回的内容格式相同，值得注意的是，这次返回的是流程图中起草的后一个环节。</p>
+<p>“form_data” 中传入的变量称为环节参与变量，这些变量都是局部变量即仅在当前环节有效，当前环节结束后就无法访问。如果您需要一个长期有效的变量，可以在环节参与变量名前加“$”,如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">formData=&#123;form_data:&#123;$endApply:<span class="keyword">false</span>, $nextOU:<span class="string">"M"</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>这样环节参与变量“endApply”和“nextOU”就会在流程实例生命周期中一直有效，它的意义在“监听器”一章可以看到。</p>
+<h3 id="开始并移动（startMove）"><a href="#开始并移动（startMove）" class="headerlink" title="开始并移动（startMove）"></a><a href="#开始并流转（startMove）">开始并移动（startMove）</a></h3><p>之前我们介绍了用于开始流程的 <code>justStart</code> 和用于流转的 <code>move</code>，但如果用户不想在第一个环节停留，我们还提供了 <code>startMove</code> 方法用于开始流程并通过第一个环节。这个方法可以看作是先 <code>justStart</code> 再 <code>move</code>，它的 api 格式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./wfservice/startMove?businessId=business2</span><br><span class="line">                &amp;assignee=ZhangSan</span><br><span class="line">                &amp;formData=&#123;form_data:&#123;endApply:<span class="keyword">false</span>, nextOU:<span class="string">"M"</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>其中，<code>businessId</code>（要启动的业务 Id）是必填项，<code>assignee</code>（环节参与者）和 <code>formData</code>（参与流转的流程变量）是选填项，但是如果待流转的环节含有条件序列流，在发起流转请求时必须包含可以执行条件判断的所有变量。它的返回和 <code>move</code> 操作的返回是相同的。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><a href="#总结">总结</a></h2><ul>
+<li><p>本章中介绍的所有 api 都支持 get 和 post 两种调用方式。</p>
+</li>
+<li><p>目前 <code>flow</code> 和 <code>start</code> 已不推荐使用，建议用户替换为 <code>move</code> 和 <code>startMove</code>。</p>
+</li>
+<li><p>本章介绍的方法参数格式都已经确定，下一章将介绍进阶操作（并行网关、监听器等）</p>
+</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/工作流/">工作流</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2017/12/04/2017-12-04-调用 myActiviti 提供的微服务/" data-title="调用 myActiviti 提供的微服务 | myActiviti cook book" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/12/05/2017-12-05-使用 myActiviti 设计流程图/" title="使用 myActiviti 设计流程图">
+  <strong>上一篇：</strong><br/>
+  <span>
+  使用 myActiviti 设计流程图</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/12/03/2017-12-03-myActiviti进阶操作和最佳实践/"  title="myActiviti 进阶操作和最佳实践">
+ <strong>下一篇：</strong><br/> 
+ <span>myActiviti 进阶操作和最佳实践
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#开始与流转"><span class="toc-text"><a href="#&#x5F00;&#x59CB;&#x4E0E;&#x6D41;&#x8F6C;" class="headerlink" title="&#x5F00;&#x59CB;&#x4E0E;&#x6D41;&#x8F6C;"></a><a href="#&#x5F00;&#x59CB;&#x4E0E;&#x6D41;&#x8F6C;">&#x5F00;&#x59CB;&#x4E0E;&#x6D41;&#x8F6C;</a></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#开始（begin）"><span class="toc-text"><a href="#&#x5F00;&#x59CB;&#xFF08;begin&#xFF09;" class="headerlink" title="&#x5F00;&#x59CB;&#xFF08;begin&#xFF09;"></a><a href="#&#x5F00;&#x59CB;&#xFF08;begin&#xFF09;">&#x5F00;&#x59CB;&#xFF08;begin&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流转（complete）"><span class="toc-text"><a href="#&#x6D41;&#x8F6C;&#xFF08;complete&#xFF09;" class="headerlink" title="&#x6D41;&#x8F6C;&#xFF08;complete&#xFF09;"></a><a href="#&#x6D41;&#x8F6C;&#xFF08;complete&#xFF09;">&#x6D41;&#x8F6C;&#xFF08;complete&#xFF09;</a></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#挂起、恢复与终止"><span class="toc-text"><a href="#&#x6302;&#x8D77;&#x3001;&#x6062;&#x590D;&#x4E0E;&#x7EC8;&#x6B62;" class="headerlink" title="&#x6302;&#x8D77;&#x3001;&#x6062;&#x590D;&#x4E0E;&#x7EC8;&#x6B62;"></a><a href="#&#x6302;&#x8D77;&#x3001;&#x6062;&#x590D;&#x4E0E;&#x7EC8;&#x6B62;">&#x6302;&#x8D77;&#x3001;&#x6062;&#x590D;&#x4E0E;&#x7EC8;&#x6B62;</a></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#挂起（suspend）"><span class="toc-text"><a href="#&#x6302;&#x8D77;&#xFF08;suspend&#xFF09;" class="headerlink" title="&#x6302;&#x8D77;&#xFF08;suspend&#xFF09;"></a><a href="#&#x6302;&#x8D77;&#xFF08;suspend&#xFF09;">&#x6302;&#x8D77;&#xFF08;suspend&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#恢复（activate）"><span class="toc-text"><a href="#&#x6062;&#x590D;&#xFF08;activate&#xFF09;" class="headerlink" title="&#x6062;&#x590D;&#xFF08;activate&#xFF09;"></a><a href="#&#x6062;&#x590D;&#xFF08;activate&#xFF09;">&#x6062;&#x590D;&#xFF08;activate&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#终止（terminate）"><span class="toc-text"><a href="#&#x7EC8;&#x6B62;&#xFF08;terminate&#xFF09;" class="headerlink" title="&#x7EC8;&#x6B62;&#xFF08;terminate&#xFF09;"></a><a href="#&#x7EC8;&#x6B62;&#xFF08;terminate&#xFF09;">&#x7EC8;&#x6B62;&#xFF08;terminate&#xFF09;</a></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#签收、取消签收与撤回"><span class="toc-text"><a href="#&#x7B7E;&#x6536;&#x3001;&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#x4E0E;&#x64A4;&#x56DE;" class="headerlink" title="&#x7B7E;&#x6536;&#x3001;&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#x4E0E;&#x64A4;&#x56DE;"></a><a href="#&#x7B7E;&#x6536;&#x3001;&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#x4E0E;&#x64A4;&#x56DE;">&#x7B7E;&#x6536;&#x3001;&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#x4E0E;&#x64A4;&#x56DE;</a></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#签收（receipt）"><span class="toc-text"><a href="#&#x7B7E;&#x6536;&#xFF08;receipt&#xFF09;" class="headerlink" title="&#x7B7E;&#x6536;&#xFF08;receipt&#xFF09;"></a><a href="#&#x7B7E;&#x6536;&#xFF08;receipt&#xFF09;">&#x7B7E;&#x6536;&#xFF08;receipt&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#取消签收（unreceipt）"><span class="toc-text"><a href="#&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#xFF08;unreceipt&#xFF09;" class="headerlink" title="&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#xFF08;unreceipt&#xFF09;"></a><a href="#&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#xFF08;unreceipt&#xFF09;">&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#xFF08;unreceipt&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#撤回（withdraw）"><span class="toc-text"><a href="#&#x64A4;&#x56DE;&#xFF08;withdraw&#xFF09;" class="headerlink" title="&#x64A4;&#x56DE;&#xFF08;withdraw&#xFF09;"></a><a href="#&#x64A4;&#x56DE;&#xFF08;withdraw&#xFF09;">&#x64A4;&#x56DE;&#xFF08;withdraw&#xFF09;</a></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#软结束与消息事件"><span class="toc-text"><a href="#&#x8F6F;&#x7ED3;&#x675F;&#x4E0E;&#x6D88;&#x606F;&#x4E8B;&#x4EF6;" class="headerlink" title="&#x8F6F;&#x7ED3;&#x675F;&#x4E0E;&#x6D88;&#x606F;&#x4E8B;&#x4EF6;"></a><a href="#&#x8F6F;&#x7ED3;&#x675F;&#x4E0E;&#x6D88;&#x606F;&#x4E8B;&#x4EF6;">&#x8F6F;&#x7ED3;&#x675F;&#x4E0E;&#x6D88;&#x606F;&#x4E8B;&#x4EF6;</a></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#软结束标志"><span class="toc-text"><a href="#&#x8F6F;&#x7ED3;&#x675F;&#x6807;&#x5FD7;" class="headerlink" title="&#x8F6F;&#x7ED3;&#x675F;&#x6807;&#x5FD7;"></a><a href="#&#x8F6F;&#x7ED3;&#x675F;&#x6807;&#x5FD7;">&#x8F6F;&#x7ED3;&#x675F;&#x6807;&#x5FD7;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#消息触发事件（message）"><span class="toc-text"><a href="#&#x6D88;&#x606F;&#x89E6;&#x53D1;&#x4E8B;&#x4EF6;&#xFF08;message&#xFF09;" class="headerlink" title="&#x6D88;&#x606F;&#x89E6;&#x53D1;&#x4E8B;&#x4EF6;&#xFF08;message&#xFF09;"></a><a href="#&#x6D88;&#x606F;&#x89E6;&#x53D1;&#x4E8B;&#x4EF6;&#xFF08;message&#xFF09;">&#x6D88;&#x606F;&#x89E6;&#x53D1;&#x4E8B;&#x4EF6;&#xFF08;message&#xFF09;</a></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#历史遗留"><span class="toc-text"><a href="#&#x5386;&#x53F2;&#x9057;&#x7559;" class="headerlink" title="&#x5386;&#x53F2;&#x9057;&#x7559;"></a><a href="#&#x5386;&#x53F2;&#x9057;&#x7559;">&#x5386;&#x53F2;&#x9057;&#x7559;</a></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#流转（flow）"><span class="toc-text"><a href="#&#x6D41;&#x8F6C;&#xFF08;flow&#xFF09;" class="headerlink" title="&#x6D41;&#x8F6C;&#xFF08;flow&#xFF09;"></a><a href="#&#x6D41;&#x8F6C;&#xFF08;flow&#xFF09;">&#x6D41;&#x8F6C;&#xFF08;flow&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#仅仅开始（justStart）"><span class="toc-text"><a href="#&#x4EC5;&#x4EC5;&#x5F00;&#x59CB;&#xFF08;justStart&#xFF09;" class="headerlink" title="&#x4EC5;&#x4EC5;&#x5F00;&#x59CB;&#xFF08;justStart&#xFF09;"></a><a href="#&#x4EC5;&#x4EC5;&#x5F00;&#x59CB;&#xFF08;justStart&#xFF09;">&#x4EC5;&#x4EC5;&#x5F00;&#x59CB;&#xFF08;justStart&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开始（start）"><span class="toc-text"><a href="#&#x5F00;&#x59CB;&#xFF08;start&#xFF09;" class="headerlink" title="&#x5F00;&#x59CB;&#xFF08;start&#xFF09;"></a><a href="#&#x5F00;&#x59CB;&#xFF08;start&#xFF09;">&#x5F00;&#x59CB;&#xFF08;start&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动（move）"><span class="toc-text"><a href="#&#x79FB;&#x52A8;&#xFF08;move&#xFF09;" class="headerlink" title="&#x79FB;&#x52A8;&#xFF08;move&#xFF09;"></a><a href="#&#x79FB;&#x52A8;&#xFF08;move&#xFF09;">&#x79FB;&#x52A8;&#xFF08;move&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开始并移动（startMove）"><span class="toc-text"><a href="#&#x5F00;&#x59CB;&#x5E76;&#x79FB;&#x52A8;&#xFF08;startMove&#xFF09;" class="headerlink" title="&#x5F00;&#x59CB;&#x5E76;&#x79FB;&#x52A8;&#xFF08;startMove&#xFF09;"></a><a href="#&#x5F00;&#x59CB;&#x5E76;&#x6D41;&#x8F6C;&#xFF08;startMove&#xFF09;">&#x5F00;&#x59CB;&#x5E76;&#x79FB;&#x52A8;&#xFF08;startMove&#xFF09;</a></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text"><a href="#&#x603B;&#x7ED3;" class="headerlink" title="&#x603B;&#x7ED3;"></a><a href="#&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</a></span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<!--<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="limeng32">limeng32</a>
+		
+		
+		</p>-->
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

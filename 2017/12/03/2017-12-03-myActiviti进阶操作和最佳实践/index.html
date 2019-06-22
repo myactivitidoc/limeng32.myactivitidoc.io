@@ -1,0 +1,542 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>myActiviti 进阶操作和最佳实践 | myActiviti cook book</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="limeng32">
+    
+
+    
+    <meta name="description" content="本章内容向您讲解 myActiviti 高级操作和最佳实践。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="myActiviti 进阶操作和最佳实践">
+<meta property="og:url" content="http://yoursite.com/2017/12/03/2017-12-03-myActiviti进阶操作和最佳实践/index.html">
+<meta property="og:site_name" content="myActiviti cook book">
+<meta property="og:description" content="本章内容向您讲解 myActiviti 高级操作和最佳实践。">
+<meta property="og:image" content="http://yoursite.com/2017/12/03/2017-12-03-myActiviti进阶操作和最佳实践/parallel.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/03/2017-12-03-myActiviti进阶操作和最佳实践/modeler_listener_2.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/03/2017-12-03-myActiviti进阶操作和最佳实践/modeler_listener2_8.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/03/2017-12-03-myActiviti进阶操作和最佳实践/modeler_listener6_3.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/03/2017-12-03-myActiviti进阶操作和最佳实践/modeler_listener7_2.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/03/2017-12-03-myActiviti进阶操作和最佳实践/modeler_listener8_2.png">
+<meta property="og:updated_time" content="2019-05-17T10:43:27.789Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="myActiviti 进阶操作和最佳实践">
+<meta name="twitter:description" content="本章内容向您讲解 myActiviti 高级操作和最佳实践。">
+<meta name="twitter:image" content="http://yoursite.com/2017/12/03/2017-12-03-myActiviti进阶操作和最佳实践/parallel.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="myActiviti cook book" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="myActiviti cook book">myActiviti cook book</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/12/03/2017-12-03-myActiviti进阶操作和最佳实践/" title="myActiviti 进阶操作和最佳实践" itemprop="url">myActiviti 进阶操作和最佳实践</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="limeng32" target="_blank" itemprop="author">limeng32</a>
+		
+  <p class="article-time">
+    <time datetime="2017-12-02T16:00:00.000Z" itemprop="datePublished"> Published 2017-12-03</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#进阶操作"><span class="toc-text"><a href="#&#x8FDB;&#x9636;&#x64CD;&#x4F5C;" class="headerlink" title="&#x8FDB;&#x9636;&#x64CD;&#x4F5C;"></a><a href="#&#x8FDB;&#x9636;&#x64CD;&#x4F5C;">&#x8FDB;&#x9636;&#x64CD;&#x4F5C;</a></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#并行调用"><span class="toc-text"><a href="#&#x5E76;&#x884C;&#x8C03;&#x7528;" class="headerlink" title="&#x5E76;&#x884C;&#x8C03;&#x7528;"></a><a href="#&#x5E76;&#x884C;&#x8C03;&#x7528;">&#x5E76;&#x884C;&#x8C03;&#x7528;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#监听器"><span class="toc-text"><a href="#&#x76D1;&#x542C;&#x5668;" class="headerlink" title="&#x76D1;&#x542C;&#x5668;"></a><a href="#&#x76D1;&#x542C;&#x5668;">&#x76D1;&#x542C;&#x5668;</a></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最佳实践"><span class="toc-text"><a href="#&#x6700;&#x4F73;&#x5B9E;&#x8DF5;" class="headerlink" title="&#x6700;&#x4F73;&#x5B9E;&#x8DF5;"></a><a href="#&#x6700;&#x4F73;&#x5B9E;&#x8DF5;">&#x6700;&#x4F73;&#x5B9E;&#x8DF5;</a></span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="进阶操作"><a href="#进阶操作" class="headerlink" title="进阶操作"></a><a href="#进阶操作">进阶操作</a></h2><h3 id="并行调用"><a href="#并行调用" class="headerlink" title="并行调用"></a><a href="#并行调用">并行调用</a></h3><p>有时候我们需要多个流程分支并行流转，myActiviti 可以通过并行网关实现这样的效果。并行网关的形状是一个菱形中间加一个 “+”，效果是它发散的多条序列流中每一条都可以独立流转；一般一个并行网关发散之后还会有另一个并行网关作为收集，例如下图：</p>
+<img src="/2017/12/03/2017-12-03-myActiviti进阶操作和最佳实践/parallel.png">
+<p>在这个流程图中，当“请各分院处理”环节流转过后，返回值会如下所示：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"DataRows"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"actId"</span>: <span class="string">"ADispose"</span>,</span><br><span class="line">            <span class="attr">"actName"</span>: <span class="string">"A分院处理"</span>,</span><br><span class="line">            <span class="attr">"actRole"</span>: [</span><br><span class="line">                <span class="string">"interfaceA"</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">"exeId"</span>: <span class="string">"40141"</span>,</span><br><span class="line">            <span class="attr">"isEnd"</span>: <span class="string">"0"</span>,</span><br><span class="line">            <span class="attr">"procInstId"</span>: <span class="string">"40130"</span>,</span><br><span class="line">            <span class="attr">"taskId"</span>: <span class="string">"40144"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"actId"</span>: <span class="string">"BDispose"</span>,</span><br><span class="line">            <span class="attr">"actName"</span>: <span class="string">"B分院处理"</span>,</span><br><span class="line">            <span class="attr">"actRole"</span>: [</span><br><span class="line">                <span class="string">"interfaceB"</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">"exeId"</span>: <span class="string">"40142"</span>,</span><br><span class="line">            <span class="attr">"isEnd"</span>: <span class="string">"0"</span>,</span><br><span class="line">            <span class="attr">"procInstId"</span>: <span class="string">"40130"</span>,</span><br><span class="line">            <span class="attr">"taskId"</span>: <span class="string">"40147"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"RetCode"</span>: <span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"RetVal"</span>: <span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"isEnd"</span>: <span class="string">"0"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>值得注意的是，<code>DataRows</code> 中出现两个流程分支，这两个分支都可以进行流转，同时 <code>exeId</code> 不再与 <code>procInstId</code> 相同；并且当流转到收集点时，先到的流程分支会返回：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"DataRows"</span>: [],</span><br><span class="line">    <span class="attr">"RetCode"</span>: <span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"RetVal"</span>: <span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"isEnd"</span>: <span class="string">"0"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>后到的分支会返回：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"DataRows"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"actId"</span>: <span class="string">"parallel_end"</span>,</span><br><span class="line">            <span class="attr">"actName"</span>: <span class="string">"总院查看处理结果"</span>,</span><br><span class="line">            <span class="attr">"actRole"</span>: [</span><br><span class="line">                <span class="string">"interface"</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">"exeId"</span>: <span class="string">"40130"</span>,</span><br><span class="line">            <span class="attr">"isEnd"</span>: <span class="string">"0"</span>,</span><br><span class="line">            <span class="attr">"procInstId"</span>: <span class="string">"40130"</span>,</span><br><span class="line">            <span class="attr">"taskId"</span>: <span class="string">"40152"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"RetCode"</span>: <span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"RetVal"</span>: <span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"isEnd"</span>: <span class="string">"0"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>即两条分支收成了一条，以上两条分支无论谁先谁后都是如此。</p>
+<h3 id="监听器"><a href="#监听器" class="headerlink" title="监听器"></a><a href="#监听器">监听器</a></h3><p>监听器是 myActiviti 的一种高级特性，它可以极大简化调用工作流 api 解决实际问题的代码，同时极大的提高您软件的生产力。</p>
+<p>当您使用工作流解决实际问题时，您进行每一次流转需要的并不仅仅是流程数据，还会用到人员数据、组织机构数据、角色数据、特定业务数据……等等。这些数据有一个统一特点，就是它们和流程环节有密切的相关性，如果您仅仅调用工作流 api，就可以在得到流程数据的同时获得当前环节相关的人员数据、组织机构数据等，将大大提高开发效率，这就是监听器的由来。</p>
+<p>在 myActiviti 中使用监听器的方法很简单，在流程图中相关环节上点击“执行监听器”或“任务监听器”即可（两者可选择的生命周期不同），这里以“执行监听器”为例：</p>
+<img src="/2017/12/03/2017-12-03-myActiviti进阶操作和最佳实践/modeler_listener_2.png">
+<p>之后进入“执行监听器”设置界面，点击如下图所示的“+”号建立监听器：</p>
+<img src="/2017/12/03/2017-12-03-myActiviti进阶操作和最佳实践/modeler_listener2_8.png">
+<p>之后，增加一个事件为 <b>start</b>，委托表达式为 <code>commonStartListener</code> 的监听器。<br>（这里我们选择监听 start 事件，它得到的数据会在返回结果中以 <code>startListener</code> 属性显示）</p>
+<img src="/2017/12/03/2017-12-03-myActiviti进阶操作和最佳实践/modeler_listener6_3.png">
+<p>因为 <code>commonStartListener</code> 监听器的要求，我们需要设置一个名为 “type” 的变量，它可以是 <b>系统保留值 “form_data”</b> 之外的 <b>任何值</b>，这里我们将它设为 “act_person”:</p>
+<img src="/2017/12/03/2017-12-03-myActiviti进阶操作和最佳实践/modeler_listener7_2.png">
+<p>之后，同样因为 <code>commonStartListener</code> 监听器的要求，我们还需要为此监听器设置一个名为 “path” 的变量，为此点选左下方的“+”号，输入名称 “path” 和字符串值 “microservice/serviceauth/p_getusersbyroleid”（一个微服务地址），如下图：</p>
+<img src="/2017/12/03/2017-12-03-myActiviti进阶操作和最佳实践/modeler_listener8_2.png">
+<p>最后点选 <code>保存</code>，这个监听器就生效了。以后再用 api 流转这个环节时，在 <code>listener</code> 中加入 “act_person” 内容和参数，例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">listener=&#123;act_person:&#123;arg_roleid:<span class="string">"046ab6429ce611e7ad99008cfa042288"</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>如上所示，相关监听器就会自动调用微服务：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">microservice/serviceauth/p_getusersbyroleid?arg_roleid=<span class="number">046</span>ab6429ce611e7ad99008cfa042288</span><br></pre></td></tr></table></figure>
+<p>（前面的 ip 部分可以不写，myActiviti 会根据当前环境自动处理）</p>
+<p>调用后得到的数据会在返回结果中以 “startListener.act_person” 属性显示，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;DataRows&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;actId&quot;: &quot;tmoCheak&quot;,</span><br><span class="line">            &quot;actName&quot;: &quot;总院TMO审核&quot;,</span><br><span class="line">            &quot;startListener&quot;: &#123;</span><br><span class="line">                &quot;act_person&quot;: &#123;</span><br><span class="line">                    &quot;RetVal&quot;: &quot;1&quot;,</span><br><span class="line">                    &quot;RetCode&quot;: &quot;1&quot;,</span><br><span class="line">                    &quot;RowCount&quot;: &quot;6&quot;,</span><br><span class="line">                    &quot;DataRows&quot;: [&#123;</span><br><span class="line">                        ......</span><br><span class="line">                    &#125;]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            &quot;actRole&quot;: [</span><br><span class="line">                &quot;tmo&quot;</span><br><span class="line">            ],</span><br><span class="line">            &quot;exeId&quot;: &quot;40013&quot;,</span><br><span class="line">            &quot;isEnd&quot;: &quot;0&quot;,</span><br><span class="line">            &quot;procInstId&quot;: &quot;40013&quot;,</span><br><span class="line">            &quot;taskId&quot;: &quot;40028&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    &quot;RetCode&quot;: &quot;1&quot;,</span><br><span class="line">    &quot;RetVal&quot;: &quot;1&quot;,</span><br><span class="line">    &quot;isEnd&quot;: &quot;0&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中，“startListener” 是封装所有 start 事件监听器返回值的固定属性，只在该事件监听器有返回值时才会出现。而 “act_person” 属性名是由监听器的 “type” 值决定的，因此您可以通过在一个环节中添加多个 <code>commonStartListener</code> 监听器的方式来调用多个微服务（按定义的顺序执行），只要它们的 “type” 值不同即可。</p>
+<p>“执行监听器” 中除 start 事件之外还有其它的事件可监控，并且 “执行监听器” 之外还有 “任务监听器”，它们的对应关系如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">监听器</th>
+<th style="text-align:left">事件</th>
+<th style="text-align:left">回传封装属性</th>
+<th style="text-align:left">委托表达式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">执行监听器</td>
+<td style="text-align:left"><code>start</code></td>
+<td style="text-align:left">startListener</td>
+<td style="text-align:left">commonStartListener</td>
+</tr>
+<tr>
+<td style="text-align:left">执行监听器</td>
+<td style="text-align:left"><code>take</code></td>
+<td style="text-align:left">无</td>
+<td style="text-align:left">当前无法触发</td>
+</tr>
+<tr>
+<td style="text-align:left">执行监听器</td>
+<td style="text-align:left"><code>end</code></td>
+<td style="text-align:left">endListener</td>
+<td style="text-align:left">commonEndListener</td>
+</tr>
+<tr>
+<td style="text-align:left">任务监听器</td>
+<td style="text-align:left"><code>create</code></td>
+<td style="text-align:left">createListener</td>
+<td style="text-align:left">commonCreateListener</td>
+</tr>
+<tr>
+<td style="text-align:left">任务监听器</td>
+<td style="text-align:left"><code>assignment</code></td>
+<td style="text-align:left">assignmentListener</td>
+<td style="text-align:left">commonAssignmentListener</td>
+</tr>
+<tr>
+<td style="text-align:left">任务监听器</td>
+<td style="text-align:left"><code>complete</code></td>
+<td style="text-align:left">completeListener</td>
+<td style="text-align:left">commonCompleteListener</td>
+</tr>
+</tbody>
+</table>
+<p>在执行监听器指向的 API 时，有时我们需要传入工作流本身的变量（如 taskId、actName 等），可这些变量在流转前用户无法获得，因此我们增加了一些内置参数来表示这些变量，如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">listener=&#123;act_person:&#123;arg_roleid:<span class="string">"046ab6429ce611e7ad99008cfa042288"</span>, arg_task_id:<span class="string">"$&#123;taskId&#125;"</span>, arg_act_name:<span class="string">"$&#123;actName&#125;"</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>这样在调用 API 时 arg_task_id 的值为当前 <code>taskId</code>，arg_act_name 的值为当前的 <code>actName</code>。</p>
+<p>全部内置参数如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数名</th>
+<th style="text-align:left">实际值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">${actId}</td>
+<td style="text-align:left">当前的环节id</td>
+</tr>
+<tr>
+<td style="text-align:left">${actName}</td>
+<td style="text-align:left">当前的环节名称</td>
+</tr>
+<tr>
+<td style="text-align:left">${exeId}</td>
+<td style="text-align:left">当前的执行变量id</td>
+</tr>
+<tr>
+<td style="text-align:left">${procDefId}</td>
+<td style="text-align:left">当前的流程定义id</td>
+</tr>
+<tr>
+<td style="text-align:left">${procInstId}</td>
+<td style="text-align:left">当前的流程实例id</td>
+</tr>
+<tr>
+<td style="text-align:left">${taskId}</td>
+<td style="text-align:left">当前的任务id</td>
+</tr>
+<tr>
+<td style="text-align:left">${taskName}</td>
+<td style="text-align:left">当前的任务名称</td>
+</tr>
+<tr>
+<td style="text-align:left">$${foo}</td>
+<td style="text-align:left">环节参与变量foo的值</td>
+</tr>
+</tbody>
+</table>
+<p>最后一个内置参数比较特殊，它的名称中 foo 可以是任何值，这样就可以把您需要的任何由 “form” 引入的变量带到 API 中。</p>
+<h2 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a><a href="#最佳实践">最佳实践</a></h2><ul>
+<li><p>单入口，单出口。虽然工作流支持多个结束环节，但不推荐这样画，建议每个图都有唯一的结束环节。</p>
+</li>
+<li><p>先复制，后变更。当流程图贴近现实场景后，会变得非常复杂，每个流程图的工作量可以达到人天级别，此时编辑流程时防止“手滑”变得至关重要（比如以为元素粘上了实际没有粘上）,尤其是对一些生产环境的流程进行变更时更是如此，所以一定要培养勤备份的习惯。</p>
+</li>
+<li><p>测试环境设计，生产环境导入。一般工作流至少有生产环境和测试环境两套。无论是新增流程还是修改流程，都应该先在测试环境设计、变更、测试，无问题后导出工作流文件，再在生产环境导入工作流文件。切记不要在生产环境进行设计。</p>
+</li>
+<li><p>合理使用监听器可以节省您大量的代码。</p>
+</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/工作流/">工作流</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2017/12/03/2017-12-03-myActiviti进阶操作和最佳实践/" data-title="myActiviti 进阶操作和最佳实践 | myActiviti cook book" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/12/04/2017-12-04-调用 myActiviti 提供的微服务/" title="调用 myActiviti 提供的微服务">
+  <strong>上一篇：</strong><br/>
+  <span>
+  调用 myActiviti 提供的微服务</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/12/02/2017-12-02-后端微服务文档/"  title="后端微服务文档">
+ <strong>下一篇：</strong><br/> 
+ <span>后端微服务文档
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#进阶操作"><span class="toc-text"><a href="#&#x8FDB;&#x9636;&#x64CD;&#x4F5C;" class="headerlink" title="&#x8FDB;&#x9636;&#x64CD;&#x4F5C;"></a><a href="#&#x8FDB;&#x9636;&#x64CD;&#x4F5C;">&#x8FDB;&#x9636;&#x64CD;&#x4F5C;</a></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#并行调用"><span class="toc-text"><a href="#&#x5E76;&#x884C;&#x8C03;&#x7528;" class="headerlink" title="&#x5E76;&#x884C;&#x8C03;&#x7528;"></a><a href="#&#x5E76;&#x884C;&#x8C03;&#x7528;">&#x5E76;&#x884C;&#x8C03;&#x7528;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#监听器"><span class="toc-text"><a href="#&#x76D1;&#x542C;&#x5668;" class="headerlink" title="&#x76D1;&#x542C;&#x5668;"></a><a href="#&#x76D1;&#x542C;&#x5668;">&#x76D1;&#x542C;&#x5668;</a></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最佳实践"><span class="toc-text"><a href="#&#x6700;&#x4F73;&#x5B9E;&#x8DF5;" class="headerlink" title="&#x6700;&#x4F73;&#x5B9E;&#x8DF5;"></a><a href="#&#x6700;&#x4F73;&#x5B9E;&#x8DF5;">&#x6700;&#x4F73;&#x5B9E;&#x8DF5;</a></span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<!--<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="limeng32">limeng32</a>
+		
+		
+		</p>-->
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

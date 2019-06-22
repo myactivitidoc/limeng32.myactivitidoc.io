@@ -1,0 +1,448 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>使用 myActiviti 设计流程图 | myActiviti cook book</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="limeng32">
+    
+
+    
+    <meta name="description" content="本章中我们以一个有实际意义的可流转的流程图，来向您介绍工作流最基本的元素。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 myActiviti 设计流程图">
+<meta property="og:url" content="http://yoursite.com/2017/12/05/2017-12-05-使用 myActiviti 设计流程图/index.html">
+<meta property="og:site_name" content="myActiviti cook book">
+<meta property="og:description" content="本章中我们以一个有实际意义的可流转的流程图，来向您介绍工作流最基本的元素。">
+<meta property="og:image" content="http://yoursite.com/2017/12/05/2017-12-05-使用%20myActiviti%20设计流程图/20171215184143259.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/05/2017-12-05-使用%20myActiviti%20设计流程图/draftTaskInput.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/05/2017-12-05-使用%20myActiviti%20设计流程图/deploy_2.png">
+<meta property="og:updated_time" content="2019-03-21T03:40:16.177Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用 myActiviti 设计流程图">
+<meta name="twitter:description" content="本章中我们以一个有实际意义的可流转的流程图，来向您介绍工作流最基本的元素。">
+<meta name="twitter:image" content="http://yoursite.com/2017/12/05/2017-12-05-使用%20myActiviti%20设计流程图/20171215184143259.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="myActiviti cook book" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="myActiviti cook book">myActiviti cook book</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/12/05/2017-12-05-使用 myActiviti 设计流程图/" title="使用 myActiviti 设计流程图" itemprop="url">使用 myActiviti 设计流程图</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="limeng32" target="_blank" itemprop="author">limeng32</a>
+		
+  <p class="article-time">
+    <time datetime="2017-12-04T16:00:00.000Z" itemprop="datePublished"> Published 2017-12-05</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#设计一个可流转的流程"><span class="toc-text"><a href="#&#x8BBE;&#x8BA1;&#x4E00;&#x4E2A;&#x53EF;&#x6D41;&#x8F6C;&#x7684;&#x6D41;&#x7A0B;" class="headerlink" title="&#x8BBE;&#x8BA1;&#x4E00;&#x4E2A;&#x53EF;&#x6D41;&#x8F6C;&#x7684;&#x6D41;&#x7A0B;"></a><a href="#&#x8BBE;&#x8BA1;&#x4E00;&#x4E2A;&#x53EF;&#x6D41;&#x8F6C;&#x7684;&#x6D41;&#x7A0B;&#x56FE;">&#x8BBE;&#x8BA1;&#x4E00;&#x4E2A;&#x53EF;&#x6D41;&#x8F6C;&#x7684;&#x6D41;&#x7A0B;</a></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户任务和环节参与者"><span class="toc-text"><a href="#&#x7528;&#x6237;&#x4EFB;&#x52A1;&#x548C;&#x73AF;&#x8282;&#x53C2;&#x4E0E;&#x8005;" class="headerlink" title="&#x7528;&#x6237;&#x4EFB;&#x52A1;&#x548C;&#x73AF;&#x8282;&#x53C2;&#x4E0E;&#x8005;"></a><a href="#&#x7528;&#x6237;&#x4EFB;&#x52A1;&#x548C;&#x73AF;&#x8282;&#x53C2;&#x4E0E;&#x8005;">&#x7528;&#x6237;&#x4EFB;&#x52A1;&#x548C;&#x73AF;&#x8282;&#x53C2;&#x4E0E;&#x8005;</a></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排它网关和流程变量"><span class="toc-text"><a href="#&#x6392;&#x5B83;&#x7F51;&#x5173;&#x548C;&#x6D41;&#x7A0B;&#x53D8;&#x91CF;" class="headerlink" title="&#x6392;&#x5B83;&#x7F51;&#x5173;&#x548C;&#x6D41;&#x7A0B;&#x53D8;&#x91CF;"></a><a href="#&#x6392;&#x5B83;&#x7F51;&#x5173;&#x548C;&#x6D41;&#x7A0B;&#x53D8;&#x91CF;">&#x6392;&#x5B83;&#x7F51;&#x5173;&#x548C;&#x6D41;&#x7A0B;&#x53D8;&#x91CF;</a></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#以关联业务方式启动流程"><span class="toc-text"><a href="#&#x4EE5;&#x5173;&#x8054;&#x4E1A;&#x52A1;&#x65B9;&#x5F0F;&#x542F;&#x52A8;&#x6D41;&#x7A0B;" class="headerlink" title="&#x4EE5;&#x5173;&#x8054;&#x4E1A;&#x52A1;&#x65B9;&#x5F0F;&#x542F;&#x52A8;&#x6D41;&#x7A0B;"></a><a href="#&#x4EE5;&#x5173;&#x8054;&#x4E1A;&#x52A1;&#x65B9;&#x5F0F;&#x542F;&#x52A8;&#x6D41;&#x7A0B;">&#x4EE5;&#x5173;&#x8054;&#x4E1A;&#x52A1;&#x65B9;&#x5F0F;&#x542F;&#x52A8;&#x6D41;&#x7A0B;</a></span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="设计一个可流转的流程"><a href="#设计一个可流转的流程" class="headerlink" title="设计一个可流转的流程"></a><a href="#设计一个可流转的流程图">设计一个可流转的流程</a></h2><p>我们设想一个公司项目立项的场景：公司内部有 3 个院：A 分院、B 分院和总院；立项起草人在起草好内容后要选择这 3 个大部门之一进行发送；每个院的 TMO（科技管理办公室）首先收到立项请求，TMO 经过审核后可以“同意”继续立项或者“不同意”返回起草人；TMO 同意后会发给本院的财务部，财务部经过审核后可以“同意”立项完成或者“不同意”返回起草人；起草人收到被返回的请求后可以进行结束。</p>
+<p>我们简单分析一下这个流程，可知除开始和结束外共需要 7 个环节：起草人、A 分院 TMO、A 分院财务部、B 分院 TMO、B 分院财务部、总院 TMO、总院财务部。同时还需要做 7 次条件判断：起草人环节需要判断是发给哪个院还是直接结束、各院 TMO 需判断同意与否（× 3）、各院财务部需判断同意与否（× 3）。而这 7 次判断涉及到的变量有：<code>endApply</code>（起草人是否结束申请）、<code>nextOU</code>（起草人发送至哪个院）、<code>ATmoAgree</code>(A 分院 tmo 是否同意）、<code>BTmoAgree</code>（B 分院 tmo 是否同意）、<code>TmoAgree</code>（总院 tmo 是否同意）、<code>AFinanceAgree</code>（分院 A 财务部是否同意）、<code>BFinanceAgree</code>（分院 B 财务部是否同意）、<code>FinanceAgree</code>（总院财务部是否同意）。</p>
+<p>将以上信息梳理好后，我们可以建一个名为“myProcess2”的流程图，然后画成如下所示：</p>
+<img src="/2017/12/05/2017-12-05-使用%20myActiviti%20设计流程图/20171215184143259.png">
+<p>这张流程图包含的元素有 <code>开始事件-普通开始事件</code>、<code>任务-用户任务</code>、<code>结束事件-普通结束事件</code>、<code>网关-互斥网关</code>、<code>序列流</code>，我们还将一条序列流的 <code>元素名称</code> 命名为“结束申请”。关于这张图的详细画法我们下面会详细介绍。</p>
+<h2 id="用户任务和环节参与者"><a href="#用户任务和环节参与者" class="headerlink" title="用户任务和环节参与者"></a><a href="#用户任务和环节参与者">用户任务和环节参与者</a></h2><p><code>用户任务</code> 是企业级应用中最常用到的一种任务，我们向工作区添加一个用户任务后，在这个任务的输入区至少要指定 2 个属性，如下：</p>
+<img src="/2017/12/05/2017-12-05-使用%20myActiviti%20设计流程图/draftTaskInput.png">
+<p>我们要指定 <code>ID</code>，以方便业务系统调用这个流程时知道当前流程是哪一个；我们要指定 <code>元素名称</code>，以方便在工作区查看这个任务；</p>
+<p>如果您在 <code>文档</code> 中加入内容，则在返回的 json 中的 “document” 属性也会显示这些内容。</p>
+<h2 id="排它网关和流程变量"><a href="#排它网关和流程变量" class="headerlink" title="排它网关和流程变量"></a><a href="#排它网关和流程变量">排它网关和流程变量</a></h2><p>之后我们将接触到一种新的元素——<code>互斥网关</code>，它的形状是一个菱形中间加一个 “X”，效果是它发散的多条序列流中最多只有一条能流转，判断能否流转的条件是序列流上的 <code>序列流条件</code>。我们以起草环节下面的互斥网关为例，它输出的 4 条序列流为：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">序列流指向</th>
+<th style="text-align:left">序列流条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>总院TMO审核</code></td>
+<td style="text-align:left">${endApply == false &amp;&amp; nextOU == “M”}</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>A分院TMO审核</code></td>
+<td style="text-align:left">${endApply == false &amp;&amp; nextOU == “A”}</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>B分院TMO审核</code></td>
+<td style="text-align:left">${endApply == false &amp;&amp; nextOU == “B”}</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>结束环节</code></td>
+<td style="text-align:left">${endApply == true}</td>
+</tr>
+</tbody>
+</table>
+<p>点击序列流后，在输入区的 <code>序列流条件</code> 输入以上条件即可。值得注意的是，我们给指向结束环节的序列流设置了 <code>元素名称</code> ，这会让这个序列流在工作区醒目，其它序列流不输入也可以。然后，其它几个网关发散的序列流的表达式分别设为 “${ATmoAgree == true}”、“${BFinanceAgree == false}”……</p>
+<p>您可能已经注意到，表达式里 <code>endApply</code> 是布尔型变量，而 <code>nextOU</code> 是 String 型变量，实际上这里还可以有数字型和时间型变量，这些称之为流程变量。在 myActiviti 中，流程变量不用事先声明，直接在条件表达式中使用就可以，在下一章您将会看到这些变量是如何控制整个流程的走向。</p>
+<h2 id="以关联业务方式启动流程"><a href="#以关联业务方式启动流程" class="headerlink" title="以关联业务方式启动流程"></a><a href="#以关联业务方式启动流程">以关联业务方式启动流程</a></h2><p>到现在为止，我们的设计工作已经完成了 90%，剩余的工作就是在流程图的输入区设置 <code>流程ID</code> 和 <code>元素名称</code>，之后点击保存按钮，<b>然后我们在部署时输入业务标识（例如输入“business2”）</b>并部署：</p>
+<img src="/2017/12/05/2017-12-05-使用%20myActiviti%20设计流程图/deploy_2.png">
+<p>这里的 “business2” 是我们为这个流程指定的业务 ID，然后准备工作就全部结束了。相信您早就想运行这个流程了吧，现在在您的浏览器输入 <a href="http://10.0.209.147/microservice/workflownew/wfservice/begin?businessId=business2" target="_blank" rel="noopener">http://10.0.209.147/microservice/workflownew/wfservice/begin?businessId=business2</a> 看看：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"DataRows"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"actId"</span>: <span class="string">"drafter"</span>,</span><br><span class="line">            <span class="attr">"actName"</span>: <span class="string">"起草"</span>,</span><br><span class="line">            <span class="attr">"actRole"</span>: [</span><br><span class="line">                <span class="string">"projectManager"</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">"document"</span>: <span class="string">"您在文档中填写的内容"</span>,</span><br><span class="line">            <span class="attr">"exeId"</span>: <span class="string">"40013"</span>,</span><br><span class="line">            <span class="attr">"isEnd"</span>: <span class="string">"0"</span>,</span><br><span class="line">            <span class="attr">"procInstId"</span>: <span class="string">"40013"</span>,</span><br><span class="line">            <span class="attr">"taskId"</span>: <span class="string">"40016"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"RetCode"</span>: <span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"RetVal"</span>: <span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"isEnd"</span>: <span class="string">"0"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果您浏览器上显示的和上面类似（仅仅是 exeId、procInstId 和 taskId 不同），那恭喜您，您的流程图成功的以微服务的方式调用了。</p>
+<p>本篇文章中我们只讲述 <code>begin</code> API 的使用，这是一种启动流程的方法，至于流转、挂起、撤回等更复杂操作，我们在下一章进行介绍。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/工作流/">工作流</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2017/12/05/2017-12-05-使用 myActiviti 设计流程图/" data-title="使用 myActiviti 设计流程图 | myActiviti cook book" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/12/06/2017-12-06-myActiviti 是什么/" title="myActiviti 是什么">
+  <strong>上一篇：</strong><br/>
+  <span>
+  myActiviti 是什么</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/12/04/2017-12-04-调用 myActiviti 提供的微服务/"  title="调用 myActiviti 提供的微服务">
+ <strong>下一篇：</strong><br/> 
+ <span>调用 myActiviti 提供的微服务
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#设计一个可流转的流程"><span class="toc-text"><a href="#&#x8BBE;&#x8BA1;&#x4E00;&#x4E2A;&#x53EF;&#x6D41;&#x8F6C;&#x7684;&#x6D41;&#x7A0B;" class="headerlink" title="&#x8BBE;&#x8BA1;&#x4E00;&#x4E2A;&#x53EF;&#x6D41;&#x8F6C;&#x7684;&#x6D41;&#x7A0B;"></a><a href="#&#x8BBE;&#x8BA1;&#x4E00;&#x4E2A;&#x53EF;&#x6D41;&#x8F6C;&#x7684;&#x6D41;&#x7A0B;&#x56FE;">&#x8BBE;&#x8BA1;&#x4E00;&#x4E2A;&#x53EF;&#x6D41;&#x8F6C;&#x7684;&#x6D41;&#x7A0B;</a></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户任务和环节参与者"><span class="toc-text"><a href="#&#x7528;&#x6237;&#x4EFB;&#x52A1;&#x548C;&#x73AF;&#x8282;&#x53C2;&#x4E0E;&#x8005;" class="headerlink" title="&#x7528;&#x6237;&#x4EFB;&#x52A1;&#x548C;&#x73AF;&#x8282;&#x53C2;&#x4E0E;&#x8005;"></a><a href="#&#x7528;&#x6237;&#x4EFB;&#x52A1;&#x548C;&#x73AF;&#x8282;&#x53C2;&#x4E0E;&#x8005;">&#x7528;&#x6237;&#x4EFB;&#x52A1;&#x548C;&#x73AF;&#x8282;&#x53C2;&#x4E0E;&#x8005;</a></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排它网关和流程变量"><span class="toc-text"><a href="#&#x6392;&#x5B83;&#x7F51;&#x5173;&#x548C;&#x6D41;&#x7A0B;&#x53D8;&#x91CF;" class="headerlink" title="&#x6392;&#x5B83;&#x7F51;&#x5173;&#x548C;&#x6D41;&#x7A0B;&#x53D8;&#x91CF;"></a><a href="#&#x6392;&#x5B83;&#x7F51;&#x5173;&#x548C;&#x6D41;&#x7A0B;&#x53D8;&#x91CF;">&#x6392;&#x5B83;&#x7F51;&#x5173;&#x548C;&#x6D41;&#x7A0B;&#x53D8;&#x91CF;</a></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#以关联业务方式启动流程"><span class="toc-text"><a href="#&#x4EE5;&#x5173;&#x8054;&#x4E1A;&#x52A1;&#x65B9;&#x5F0F;&#x542F;&#x52A8;&#x6D41;&#x7A0B;" class="headerlink" title="&#x4EE5;&#x5173;&#x8054;&#x4E1A;&#x52A1;&#x65B9;&#x5F0F;&#x542F;&#x52A8;&#x6D41;&#x7A0B;"></a><a href="#&#x4EE5;&#x5173;&#x8054;&#x4E1A;&#x52A1;&#x65B9;&#x5F0F;&#x542F;&#x52A8;&#x6D41;&#x7A0B;">&#x4EE5;&#x5173;&#x8054;&#x4E1A;&#x52A1;&#x65B9;&#x5F0F;&#x542F;&#x52A8;&#x6D41;&#x7A0B;</a></span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<!--<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="limeng32">limeng32</a>
+		
+		
+		</p>-->
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
