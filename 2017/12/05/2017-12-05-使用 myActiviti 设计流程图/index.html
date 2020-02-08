@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://yoursite.com/2017/12/05/2017-12-05-使用%20myActiviti%20设计流程图/20171215184143259.png">
 <meta property="og:image" content="http://yoursite.com/2017/12/05/2017-12-05-使用%20myActiviti%20设计流程图/draftTaskInput.png">
 <meta property="og:image" content="http://yoursite.com/2017/12/05/2017-12-05-使用%20myActiviti%20设计流程图/deploy_2.png">
-<meta property="og:updated_time" content="2019-03-21T03:40:16.177Z">
+<meta property="og:updated_time" content="2020-02-08T12:32:32.790Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用 myActiviti 设计流程图">
 <meta name="twitter:description" content="本章中我们以一个有实际意义的可流转的流程图，来向您介绍工作流最基本的元素。">
@@ -48,7 +48,7 @@
 				<h1 class="site-name"><a href="/" title="myActiviti cook book">myActiviti cook book</a></h1>
 				<h2 class="blog-motto"></h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -62,7 +62,7 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
 						<input type="hidden" name="q" value="site:yoursite.com">
 					</form>
 					
@@ -85,14 +85,14 @@
 		<a href="/about" title="limeng32" target="_blank" itemprop="author">limeng32</a>
 		
   <p class="article-time">
-    <time datetime="2017-12-04T16:00:00.000Z" itemprop="datePublished"> Published 2017-12-05</time>
+    <time datetime="2017-12-04T16:00:00.000Z" itemprop="datePublished"> 發表於 2017-12-05</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">Contents</strong>
+			<strong class="toc-title">文章目錄</strong>
 		
 		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#设计一个可流转的流程"><span class="toc-text"><a href="#&#x8BBE;&#x8BA1;&#x4E00;&#x4E2A;&#x53EF;&#x6D41;&#x8F6C;&#x7684;&#x6D41;&#x7A0B;" class="headerlink" title="&#x8BBE;&#x8BA1;&#x4E00;&#x4E2A;&#x53EF;&#x6D41;&#x8F6C;&#x7684;&#x6D41;&#x7A0B;"></a><a href="#&#x8BBE;&#x8BA1;&#x4E00;&#x4E2A;&#x53EF;&#x6D41;&#x8F6C;&#x7684;&#x6D41;&#x7A0B;&#x56FE;">&#x8BBE;&#x8BA1;&#x4E00;&#x4E2A;&#x53EF;&#x6D41;&#x8F6C;&#x7684;&#x6D41;&#x7A0B;</a></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户任务和环节参与者"><span class="toc-text"><a href="#&#x7528;&#x6237;&#x4EFB;&#x52A1;&#x548C;&#x73AF;&#x8282;&#x53C2;&#x4E0E;&#x8005;" class="headerlink" title="&#x7528;&#x6237;&#x4EFB;&#x52A1;&#x548C;&#x73AF;&#x8282;&#x53C2;&#x4E0E;&#x8005;"></a><a href="#&#x7528;&#x6237;&#x4EFB;&#x52A1;&#x548C;&#x73AF;&#x8282;&#x53C2;&#x4E0E;&#x8005;">&#x7528;&#x6237;&#x4EFB;&#x52A1;&#x548C;&#x73AF;&#x8282;&#x53C2;&#x4E0E;&#x8005;</a></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排它网关和流程变量"><span class="toc-text"><a href="#&#x6392;&#x5B83;&#x7F51;&#x5173;&#x548C;&#x6D41;&#x7A0B;&#x53D8;&#x91CF;" class="headerlink" title="&#x6392;&#x5B83;&#x7F51;&#x5173;&#x548C;&#x6D41;&#x7A0B;&#x53D8;&#x91CF;"></a><a href="#&#x6392;&#x5B83;&#x7F51;&#x5173;&#x548C;&#x6D41;&#x7A0B;&#x53D8;&#x91CF;">&#x6392;&#x5B83;&#x7F51;&#x5173;&#x548C;&#x6D41;&#x7A0B;&#x53D8;&#x91CF;</a></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#以关联业务方式启动流程"><span class="toc-text"><a href="#&#x4EE5;&#x5173;&#x8054;&#x4E1A;&#x52A1;&#x65B9;&#x5F0F;&#x542F;&#x52A8;&#x6D41;&#x7A0B;" class="headerlink" title="&#x4EE5;&#x5173;&#x8054;&#x4E1A;&#x52A1;&#x65B9;&#x5F0F;&#x542F;&#x52A8;&#x6D41;&#x7A0B;"></a><a href="#&#x4EE5;&#x5173;&#x8054;&#x4E1A;&#x52A1;&#x65B9;&#x5F0F;&#x542F;&#x52A8;&#x6D41;&#x7A0B;">&#x4EE5;&#x5173;&#x8054;&#x4E1A;&#x52A1;&#x65B9;&#x5F0F;&#x542F;&#x52A8;&#x6D41;&#x7A0B;</a></span></a></li></ol>
 		
@@ -138,7 +138,7 @@
 <p>您可能已经注意到，表达式里 <code>endApply</code> 是布尔型变量，而 <code>nextOU</code> 是 String 型变量，实际上这里还可以有数字型和时间型变量，这些称之为流程变量。在 myActiviti 中，流程变量不用事先声明，直接在条件表达式中使用就可以，在下一章您将会看到这些变量是如何控制整个流程的走向。</p>
 <h2 id="以关联业务方式启动流程"><a href="#以关联业务方式启动流程" class="headerlink" title="以关联业务方式启动流程"></a><a href="#以关联业务方式启动流程">以关联业务方式启动流程</a></h2><p>到现在为止，我们的设计工作已经完成了 90%，剩余的工作就是在流程图的输入区设置 <code>流程ID</code> 和 <code>元素名称</code>，之后点击保存按钮，<b>然后我们在部署时输入业务标识（例如输入“business2”）</b>并部署：</p>
 <img src="/2017/12/05/2017-12-05-使用%20myActiviti%20设计流程图/deploy_2.png">
-<p>这里的 “business2” 是我们为这个流程指定的业务 ID，然后准备工作就全部结束了。相信您早就想运行这个流程了吧，现在在您的浏览器输入 <a href="http://10.0.209.147/microservice/workflownew/wfservice/begin?businessId=business2" target="_blank" rel="noopener">http://10.0.209.147/microservice/workflownew/wfservice/begin?businessId=business2</a> 看看：</p>
+<p>这里的 “business2” 是我们为这个流程指定的业务 ID，然后准备工作就全部结束了。相信您早就想运行这个流程了吧，现在在您的浏览器输入 ${工作流地址}/microservice/workflownew/wfservice/begin?businessId=business2 看看：</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"DataRows"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"actId"</span>: <span class="string">"drafter"</span>,</span><br><span class="line">            <span class="attr">"actName"</span>: <span class="string">"起草"</span>,</span><br><span class="line">            <span class="attr">"actRole"</span>: [</span><br><span class="line">                <span class="string">"projectManager"</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">"document"</span>: <span class="string">"您在文档中填写的内容"</span>,</span><br><span class="line">            <span class="attr">"exeId"</span>: <span class="string">"40013"</span>,</span><br><span class="line">            <span class="attr">"isEnd"</span>: <span class="string">"0"</span>,</span><br><span class="line">            <span class="attr">"procInstId"</span>: <span class="string">"40013"</span>,</span><br><span class="line">            <span class="attr">"taskId"</span>: <span class="string">"40016"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"RetCode"</span>: <span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"RetVal"</span>: <span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"isEnd"</span>: <span class="string">"0"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如果您浏览器上显示的和上面类似（仅仅是 exeId、procInstId 和 taskId 不同），那恭喜您，您的流程图成功的以微服务的方式调用了。</p>
 <p>本篇文章中我们只讲述 <code>begin</code> API 的使用，这是一种启动流程的方法，至于流转、挂起、撤回等更复杂操作，我们在下一章进行介绍。</p>
@@ -196,21 +196,21 @@
 
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">Contents</strong>
+  <strong class="toc-title">文章目錄</strong>
  
  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#设计一个可流转的流程"><span class="toc-text"><a href="#&#x8BBE;&#x8BA1;&#x4E00;&#x4E2A;&#x53EF;&#x6D41;&#x8F6C;&#x7684;&#x6D41;&#x7A0B;" class="headerlink" title="&#x8BBE;&#x8BA1;&#x4E00;&#x4E2A;&#x53EF;&#x6D41;&#x8F6C;&#x7684;&#x6D41;&#x7A0B;"></a><a href="#&#x8BBE;&#x8BA1;&#x4E00;&#x4E2A;&#x53EF;&#x6D41;&#x8F6C;&#x7684;&#x6D41;&#x7A0B;&#x56FE;">&#x8BBE;&#x8BA1;&#x4E00;&#x4E2A;&#x53EF;&#x6D41;&#x8F6C;&#x7684;&#x6D41;&#x7A0B;</a></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户任务和环节参与者"><span class="toc-text"><a href="#&#x7528;&#x6237;&#x4EFB;&#x52A1;&#x548C;&#x73AF;&#x8282;&#x53C2;&#x4E0E;&#x8005;" class="headerlink" title="&#x7528;&#x6237;&#x4EFB;&#x52A1;&#x548C;&#x73AF;&#x8282;&#x53C2;&#x4E0E;&#x8005;"></a><a href="#&#x7528;&#x6237;&#x4EFB;&#x52A1;&#x548C;&#x73AF;&#x8282;&#x53C2;&#x4E0E;&#x8005;">&#x7528;&#x6237;&#x4EFB;&#x52A1;&#x548C;&#x73AF;&#x8282;&#x53C2;&#x4E0E;&#x8005;</a></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排它网关和流程变量"><span class="toc-text"><a href="#&#x6392;&#x5B83;&#x7F51;&#x5173;&#x548C;&#x6D41;&#x7A0B;&#x53D8;&#x91CF;" class="headerlink" title="&#x6392;&#x5B83;&#x7F51;&#x5173;&#x548C;&#x6D41;&#x7A0B;&#x53D8;&#x91CF;"></a><a href="#&#x6392;&#x5B83;&#x7F51;&#x5173;&#x548C;&#x6D41;&#x7A0B;&#x53D8;&#x91CF;">&#x6392;&#x5B83;&#x7F51;&#x5173;&#x548C;&#x6D41;&#x7A0B;&#x53D8;&#x91CF;</a></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#以关联业务方式启动流程"><span class="toc-text"><a href="#&#x4EE5;&#x5173;&#x8054;&#x4E1A;&#x52A1;&#x65B9;&#x5F0F;&#x542F;&#x52A8;&#x6D41;&#x7A0B;" class="headerlink" title="&#x4EE5;&#x5173;&#x8054;&#x4E1A;&#x52A1;&#x65B9;&#x5F0F;&#x542F;&#x52A8;&#x6D41;&#x7A0B;"></a><a href="#&#x4EE5;&#x5173;&#x8054;&#x4E1A;&#x52A1;&#x65B9;&#x5F0F;&#x542F;&#x52A8;&#x6D41;&#x7A0B;">&#x4EE5;&#x5173;&#x8054;&#x4E1A;&#x52A1;&#x65B9;&#x5F0F;&#x542F;&#x52A8;&#x6D41;&#x7A0B;</a></span></a></li></ol>
  
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
 <aside class="clearfix">
 
   <div class="linkslist">
-  <p class="asidetitle">Links</p>
+  <p class="asidetitle">友情鏈接</p>
     <ul>
         
     </ul>
@@ -428,7 +428,7 @@ var _hmt = _hmt || [];
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 
