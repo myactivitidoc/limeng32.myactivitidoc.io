@@ -36,7 +36,7 @@
 <meta property="og:image" content="http://yoursite.com/2017/12/03/2017-12-03-myActiviti进阶操作和最佳实践/call_sub_9.png">
 <meta property="og:image" content="http://yoursite.com/2017/12/03/2017-12-03-myActiviti进阶操作和最佳实践/call_sub_10.png">
 <meta property="og:image" content="http://yoursite.com/2017/12/03/2017-12-03-myActiviti进阶操作和最佳实践/advanced_email.png">
-<meta property="og:updated_time" content="2020-01-07T03:09:35.469Z">
+<meta property="og:updated_time" content="2021-01-31T14:26:22.948Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="myActiviti 进阶操作和最佳实践">
 <meta name="twitter:description" content="本章内容向您讲解 myActiviti 高级操作和最佳实践。">
@@ -64,7 +64,7 @@
 				<h1 class="site-name"><a href="/" title="myActiviti cook book">myActiviti cook book</a></h1>
 				<h2 class="blog-motto"></h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -78,7 +78,7 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
 						<input type="hidden" name="q" value="site:yoursite.com">
 					</form>
 					
@@ -101,16 +101,16 @@
 		<a href="/about" title="limeng32" target="_blank" itemprop="author">limeng32</a>
 		
   <p class="article-time">
-    <time datetime="2017-12-02T16:00:00.000Z" itemprop="datePublished"> 发表于 2017-12-03</time>
+    <time datetime="2017-12-02T16:00:00.000Z" itemprop="datePublished"> Published 2017-12-03</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
+			<strong class="toc-title">Contents</strong>
 		
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#进阶操作"><span class="toc-text"><a href="#&#x8FDB;&#x9636;&#x64CD;&#x4F5C;" class="headerlink" title="&#x8FDB;&#x9636;&#x64CD;&#x4F5C;"></a><a href="#&#x8FDB;&#x9636;&#x64CD;&#x4F5C;">&#x8FDB;&#x9636;&#x64CD;&#x4F5C;</a></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#并行网关"><span class="toc-text"><a href="#&#x5E76;&#x884C;&#x7F51;&#x5173;" class="headerlink" title="&#x5E76;&#x884C;&#x7F51;&#x5173;"></a><a href="#&#x5E76;&#x884C;&#x7F51;&#x5173;">&#x5E76;&#x884C;&#x7F51;&#x5173;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#包容网关"><span class="toc-text"><a href="#&#x5305;&#x5BB9;&#x7F51;&#x5173;" class="headerlink" title="&#x5305;&#x5BB9;&#x7F51;&#x5173;"></a><a href="#&#x5305;&#x5BB9;&#x7F51;&#x5173;">&#x5305;&#x5BB9;&#x7F51;&#x5173;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#监听器"><span class="toc-text"><a href="#&#x76D1;&#x542C;&#x5668;" class="headerlink" title="&#x76D1;&#x542C;&#x5668;"></a><a href="#&#x76D1;&#x542C;&#x5668;">&#x76D1;&#x542C;&#x5668;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用子流程"><span class="toc-text"><a href="#&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;" class="headerlink" title="&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;"></a><a href="#&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;">&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用子流程进阶"><span class="toc-text"><a href="#&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;&#x8FDB;&#x9636;" class="headerlink" title="&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;&#x8FDB;&#x9636;"></a><a href="#&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;&#x8FDB;&#x9636;">&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;&#x8FDB;&#x9636;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#高级邮件任务"><span class="toc-text"><a href="#&#x9AD8;&#x7EA7;&#x90AE;&#x4EF6;&#x4EFB;&#x52A1;" class="headerlink" title="&#x9AD8;&#x7EA7;&#x90AE;&#x4EF6;&#x4EFB;&#x52A1;"></a><a href="#&#x9AD8;&#x7EA7;&#x90AE;&#x4EF6;&#x4EFB;&#x52A1;">&#x9AD8;&#x7EA7;&#x90AE;&#x4EF6;&#x4EFB;&#x52A1;</a></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最佳实践"><span class="toc-text"><a href="#&#x6700;&#x4F73;&#x5B9E;&#x8DF5;" class="headerlink" title="&#x6700;&#x4F73;&#x5B9E;&#x8DF5;"></a><a href="#&#x6700;&#x4F73;&#x5B9E;&#x8DF5;">&#x6700;&#x4F73;&#x5B9E;&#x8DF5;</a></span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#进阶操作"><span class="toc-text"><a href="#&#x8FDB;&#x9636;&#x64CD;&#x4F5C;" class="headerlink" title="&#x8FDB;&#x9636;&#x64CD;&#x4F5C;"></a><a href="#&#x8FDB;&#x9636;&#x64CD;&#x4F5C;">&#x8FDB;&#x9636;&#x64CD;&#x4F5C;</a></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#并行网关"><span class="toc-text"><a href="#&#x5E76;&#x884C;&#x7F51;&#x5173;" class="headerlink" title="&#x5E76;&#x884C;&#x7F51;&#x5173;"></a><a href="#&#x5E76;&#x884C;&#x7F51;&#x5173;">&#x5E76;&#x884C;&#x7F51;&#x5173;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#包容网关"><span class="toc-text"><a href="#&#x5305;&#x5BB9;&#x7F51;&#x5173;" class="headerlink" title="&#x5305;&#x5BB9;&#x7F51;&#x5173;"></a><a href="#&#x5305;&#x5BB9;&#x7F51;&#x5173;">&#x5305;&#x5BB9;&#x7F51;&#x5173;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#监听器"><span class="toc-text"><a href="#&#x76D1;&#x542C;&#x5668;" class="headerlink" title="&#x76D1;&#x542C;&#x5668;"></a><a href="#&#x76D1;&#x542C;&#x5668;">&#x76D1;&#x542C;&#x5668;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用子流程"><span class="toc-text"><a href="#&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;" class="headerlink" title="&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;"></a><a href="#&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;">&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用子流程进阶"><span class="toc-text"><a href="#&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;&#x8FDB;&#x9636;" class="headerlink" title="&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;&#x8FDB;&#x9636;"></a><a href="#&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;&#x8FDB;&#x9636;">&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;&#x8FDB;&#x9636;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#高级邮件任务"><span class="toc-text"><a href="#&#x9AD8;&#x7EA7;&#x90AE;&#x4EF6;&#x4EFB;&#x52A1;" class="headerlink" title="&#x9AD8;&#x7EA7;&#x90AE;&#x4EF6;&#x4EFB;&#x52A1;"></a><a href="#&#x9AD8;&#x7EA7;&#x90AE;&#x4EF6;&#x4EFB;&#x52A1;">&#x9AD8;&#x7EA7;&#x90AE;&#x4EF6;&#x4EFB;&#x52A1;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#特殊调用参数"><span class="toc-text"><a href="#&#x7279;&#x6B8A;&#x8C03;&#x7528;&#x53C2;&#x6570;" class="headerlink" title="&#x7279;&#x6B8A;&#x8C03;&#x7528;&#x53C2;&#x6570;"></a><a href="#&#x7279;&#x6B8A;&#x8C03;&#x7528;&#x53C2;&#x6570;">&#x7279;&#x6B8A;&#x8C03;&#x7528;&#x53C2;&#x6570;</a></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最佳实践"><span class="toc-text"><a href="#&#x6700;&#x4F73;&#x5B9E;&#x8DF5;" class="headerlink" title="&#x6700;&#x4F73;&#x5B9E;&#x8DF5;"></a><a href="#&#x6700;&#x4F73;&#x5B9E;&#x8DF5;">&#x6700;&#x4F73;&#x5B9E;&#x8DF5;</a></span></a></li></ol>
 		
 		</div>
 		
@@ -237,6 +237,14 @@
 <td style="text-align:left">当前的任务名称</td>
 </tr>
 <tr>
+<td style="text-align:left">${lastTaskId}</td>
+<td style="text-align:left">前一任务的id</td>
+</tr>
+<tr>
+<td style="text-align:left">${isWithdraw}</td>
+<td style="text-align:left">是否是撤回操作，默认为false，当执行withdraw操作时此值为true</td>
+</tr>
+<tr>
 <td style="text-align:left">$${foo}</td>
 <td style="text-align:left">环节参与变量foo的值</td>
 </tr>
@@ -282,6 +290,27 @@
 <p>（注意：如果在浏览器中调用这个服务，需要将 <code>{</code> 转义为 <code>%7B</code>，将 <code>}</code> 转义为 <code>%7D</code>。）</p>
 <p>这样一来，内容为 “张三您好，欢迎使用<b>工作流平台</b>！” 的邮件就会发送到 “zhang3@test.org” 邮箱中。</p>
 <p>环节参与变量中的 <code>email</code> 是必需的，它用来指定邮件接收方。可以在 <code>email</code> 中指定多个邮箱并用 “;” 或 “,” 分隔，这样就能一次给多个邮箱群发邮件。</p>
+<h3 id="特殊调用参数"><a href="#特殊调用参数" class="headerlink" title="特殊调用参数"></a><a href="#特殊调用参数">特殊调用参数</a></h3><p>在用户调用工作流（如 <code>begin</code>）时有些参数会起到特殊的做用，这些参数都以 “_” 开头，如下所示：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数名</th>
+<th style="text-align:left">实际值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">_softTransaction</td>
+<td style="text-align:left">当值为 <code>true</code> 时对监听器结果进行事务回滚，为其它值时对监听器结果不进行事务回滚</td>
+</tr>
+<tr>
+<td style="text-align:left">_content</td>
+<td style="text-align:left">当值为 <code>jsonEnumUseName</code> 时回传 json 中的 <code>isEnd</code> 值为 <code>NO</code> 或 <code>YES</code>，为其它值时回传 json 中的 <code>isEnd</code> 值为 <code>0</code> 或 <code>1</code></td>
+</tr>
+</tbody>
+</table>
+<p>例如，当用户启动一个流程，同时开启它 <code>softTransaction:true</code> 和 <code>_content:jsonEnumUseName</code> 性质时，只需要像下面这样调用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">./wfservice/begin?businessId=xxx</span><br><span class="line">                 &amp;_softTransaction=true</span><br><span class="line">                 &amp;_content=jsonEnumUseName</span><br><span class="line">                 &amp;form=...</span><br></pre></td></tr></table></figure>
 <h2 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a><a href="#最佳实践">最佳实践</a></h2><ul>
 <li><p>单入口，单出口。虽然工作流支持多个结束环节，但不推荐这样画，建议每个图都有唯一的结束环节。</p>
 </li>
@@ -338,21 +367,21 @@
 
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
+  <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#进阶操作"><span class="toc-text"><a href="#&#x8FDB;&#x9636;&#x64CD;&#x4F5C;" class="headerlink" title="&#x8FDB;&#x9636;&#x64CD;&#x4F5C;"></a><a href="#&#x8FDB;&#x9636;&#x64CD;&#x4F5C;">&#x8FDB;&#x9636;&#x64CD;&#x4F5C;</a></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#并行网关"><span class="toc-text"><a href="#&#x5E76;&#x884C;&#x7F51;&#x5173;" class="headerlink" title="&#x5E76;&#x884C;&#x7F51;&#x5173;"></a><a href="#&#x5E76;&#x884C;&#x7F51;&#x5173;">&#x5E76;&#x884C;&#x7F51;&#x5173;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#包容网关"><span class="toc-text"><a href="#&#x5305;&#x5BB9;&#x7F51;&#x5173;" class="headerlink" title="&#x5305;&#x5BB9;&#x7F51;&#x5173;"></a><a href="#&#x5305;&#x5BB9;&#x7F51;&#x5173;">&#x5305;&#x5BB9;&#x7F51;&#x5173;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#监听器"><span class="toc-text"><a href="#&#x76D1;&#x542C;&#x5668;" class="headerlink" title="&#x76D1;&#x542C;&#x5668;"></a><a href="#&#x76D1;&#x542C;&#x5668;">&#x76D1;&#x542C;&#x5668;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用子流程"><span class="toc-text"><a href="#&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;" class="headerlink" title="&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;"></a><a href="#&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;">&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用子流程进阶"><span class="toc-text"><a href="#&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;&#x8FDB;&#x9636;" class="headerlink" title="&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;&#x8FDB;&#x9636;"></a><a href="#&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;&#x8FDB;&#x9636;">&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;&#x8FDB;&#x9636;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#高级邮件任务"><span class="toc-text"><a href="#&#x9AD8;&#x7EA7;&#x90AE;&#x4EF6;&#x4EFB;&#x52A1;" class="headerlink" title="&#x9AD8;&#x7EA7;&#x90AE;&#x4EF6;&#x4EFB;&#x52A1;"></a><a href="#&#x9AD8;&#x7EA7;&#x90AE;&#x4EF6;&#x4EFB;&#x52A1;">&#x9AD8;&#x7EA7;&#x90AE;&#x4EF6;&#x4EFB;&#x52A1;</a></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最佳实践"><span class="toc-text"><a href="#&#x6700;&#x4F73;&#x5B9E;&#x8DF5;" class="headerlink" title="&#x6700;&#x4F73;&#x5B9E;&#x8DF5;"></a><a href="#&#x6700;&#x4F73;&#x5B9E;&#x8DF5;">&#x6700;&#x4F73;&#x5B9E;&#x8DF5;</a></span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#进阶操作"><span class="toc-text"><a href="#&#x8FDB;&#x9636;&#x64CD;&#x4F5C;" class="headerlink" title="&#x8FDB;&#x9636;&#x64CD;&#x4F5C;"></a><a href="#&#x8FDB;&#x9636;&#x64CD;&#x4F5C;">&#x8FDB;&#x9636;&#x64CD;&#x4F5C;</a></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#并行网关"><span class="toc-text"><a href="#&#x5E76;&#x884C;&#x7F51;&#x5173;" class="headerlink" title="&#x5E76;&#x884C;&#x7F51;&#x5173;"></a><a href="#&#x5E76;&#x884C;&#x7F51;&#x5173;">&#x5E76;&#x884C;&#x7F51;&#x5173;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#包容网关"><span class="toc-text"><a href="#&#x5305;&#x5BB9;&#x7F51;&#x5173;" class="headerlink" title="&#x5305;&#x5BB9;&#x7F51;&#x5173;"></a><a href="#&#x5305;&#x5BB9;&#x7F51;&#x5173;">&#x5305;&#x5BB9;&#x7F51;&#x5173;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#监听器"><span class="toc-text"><a href="#&#x76D1;&#x542C;&#x5668;" class="headerlink" title="&#x76D1;&#x542C;&#x5668;"></a><a href="#&#x76D1;&#x542C;&#x5668;">&#x76D1;&#x542C;&#x5668;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用子流程"><span class="toc-text"><a href="#&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;" class="headerlink" title="&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;"></a><a href="#&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;">&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用子流程进阶"><span class="toc-text"><a href="#&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;&#x8FDB;&#x9636;" class="headerlink" title="&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;&#x8FDB;&#x9636;"></a><a href="#&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;&#x8FDB;&#x9636;">&#x8C03;&#x7528;&#x5B50;&#x6D41;&#x7A0B;&#x8FDB;&#x9636;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#高级邮件任务"><span class="toc-text"><a href="#&#x9AD8;&#x7EA7;&#x90AE;&#x4EF6;&#x4EFB;&#x52A1;" class="headerlink" title="&#x9AD8;&#x7EA7;&#x90AE;&#x4EF6;&#x4EFB;&#x52A1;"></a><a href="#&#x9AD8;&#x7EA7;&#x90AE;&#x4EF6;&#x4EFB;&#x52A1;">&#x9AD8;&#x7EA7;&#x90AE;&#x4EF6;&#x4EFB;&#x52A1;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#特殊调用参数"><span class="toc-text"><a href="#&#x7279;&#x6B8A;&#x8C03;&#x7528;&#x53C2;&#x6570;" class="headerlink" title="&#x7279;&#x6B8A;&#x8C03;&#x7528;&#x53C2;&#x6570;"></a><a href="#&#x7279;&#x6B8A;&#x8C03;&#x7528;&#x53C2;&#x6570;">&#x7279;&#x6B8A;&#x8C03;&#x7528;&#x53C2;&#x6570;</a></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最佳实践"><span class="toc-text"><a href="#&#x6700;&#x4F73;&#x5B9E;&#x8DF5;" class="headerlink" title="&#x6700;&#x4F73;&#x5B9E;&#x8DF5;"></a><a href="#&#x6700;&#x4F73;&#x5B9E;&#x8DF5;">&#x6700;&#x4F73;&#x5B9E;&#x8DF5;</a></span></a></li></ol>
  
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
 <aside class="clearfix">
 
   <div class="linkslist">
-  <p class="asidetitle">友情链接</p>
+  <p class="asidetitle">Links</p>
     <ul>
         
     </ul>
@@ -380,7 +409,7 @@
 		
 
 		<!--<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2020 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2021 
 		
 		<a href="/about" target="_blank" title="limeng32">limeng32</a>
 		
@@ -570,7 +599,7 @@ var _hmt = _hmt || [];
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 

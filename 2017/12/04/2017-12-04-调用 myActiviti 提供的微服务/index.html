@@ -17,7 +17,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/12/04/2017-12-04-调用 myActiviti 提供的微服务/index.html">
 <meta property="og:site_name" content="myActiviti cook book">
 <meta property="og:description" content="本章内容向您讲解如何调用 myActiviti 提供的微服务。">
-<meta property="og:updated_time" content="2019-12-11T03:00:02.927Z">
+<meta property="og:updated_time" content="2021-01-31T14:35:49.247Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="调用 myActiviti 提供的微服务">
 <meta name="twitter:description" content="本章内容向您讲解如何调用 myActiviti 提供的微服务。">
@@ -44,7 +44,7 @@
 				<h1 class="site-name"><a href="/" title="myActiviti cook book">myActiviti cook book</a></h1>
 				<h2 class="blog-motto"></h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -58,7 +58,7 @@
  					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
 						<input type="hidden" name="q" value="site:yoursite.com">
 					</form>
 					
@@ -81,14 +81,14 @@
 		<a href="/about" title="limeng32" target="_blank" itemprop="author">limeng32</a>
 		
   <p class="article-time">
-    <time datetime="2017-12-03T16:00:00.000Z" itemprop="datePublished"> 发表于 2017-12-04</time>
+    <time datetime="2017-12-03T16:00:00.000Z" itemprop="datePublished"> Published 2017-12-04</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
+			<strong class="toc-title">Contents</strong>
 		
 		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#开始与流转"><span class="toc-text"><a href="#&#x5F00;&#x59CB;&#x4E0E;&#x6D41;&#x8F6C;" class="headerlink" title="&#x5F00;&#x59CB;&#x4E0E;&#x6D41;&#x8F6C;"></a><a href="#&#x5F00;&#x59CB;&#x4E0E;&#x6D41;&#x8F6C;">&#x5F00;&#x59CB;&#x4E0E;&#x6D41;&#x8F6C;</a></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#开始（begin）"><span class="toc-text"><a href="#&#x5F00;&#x59CB;&#xFF08;begin&#xFF09;" class="headerlink" title="&#x5F00;&#x59CB;&#xFF08;begin&#xFF09;"></a><a href="#&#x5F00;&#x59CB;&#xFF08;begin&#xFF09;">&#x5F00;&#x59CB;&#xFF08;begin&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流转（complete）"><span class="toc-text"><a href="#&#x6D41;&#x8F6C;&#xFF08;complete&#xFF09;" class="headerlink" title="&#x6D41;&#x8F6C;&#xFF08;complete&#xFF09;"></a><a href="#&#x6D41;&#x8F6C;&#xFF08;complete&#xFF09;">&#x6D41;&#x8F6C;&#xFF08;complete&#xFF09;</a></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#挂起、恢复与终止"><span class="toc-text"><a href="#&#x6302;&#x8D77;&#x3001;&#x6062;&#x590D;&#x4E0E;&#x7EC8;&#x6B62;" class="headerlink" title="&#x6302;&#x8D77;&#x3001;&#x6062;&#x590D;&#x4E0E;&#x7EC8;&#x6B62;"></a><a href="#&#x6302;&#x8D77;&#x3001;&#x6062;&#x590D;&#x4E0E;&#x7EC8;&#x6B62;">&#x6302;&#x8D77;&#x3001;&#x6062;&#x590D;&#x4E0E;&#x7EC8;&#x6B62;</a></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#挂起（suspend）"><span class="toc-text"><a href="#&#x6302;&#x8D77;&#xFF08;suspend&#xFF09;" class="headerlink" title="&#x6302;&#x8D77;&#xFF08;suspend&#xFF09;"></a><a href="#&#x6302;&#x8D77;&#xFF08;suspend&#xFF09;">&#x6302;&#x8D77;&#xFF08;suspend&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#恢复（activate）"><span class="toc-text"><a href="#&#x6062;&#x590D;&#xFF08;activate&#xFF09;" class="headerlink" title="&#x6062;&#x590D;&#xFF08;activate&#xFF09;"></a><a href="#&#x6062;&#x590D;&#xFF08;activate&#xFF09;">&#x6062;&#x590D;&#xFF08;activate&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#终止（terminate）"><span class="toc-text"><a href="#&#x7EC8;&#x6B62;&#xFF08;terminate&#xFF09;" class="headerlink" title="&#x7EC8;&#x6B62;&#xFF08;terminate&#xFF09;"></a><a href="#&#x7EC8;&#x6B62;&#xFF08;terminate&#xFF09;">&#x7EC8;&#x6B62;&#xFF08;terminate&#xFF09;</a></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#签收、取消签收与撤回"><span class="toc-text"><a href="#&#x7B7E;&#x6536;&#x3001;&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#x4E0E;&#x64A4;&#x56DE;" class="headerlink" title="&#x7B7E;&#x6536;&#x3001;&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#x4E0E;&#x64A4;&#x56DE;"></a><a href="#&#x7B7E;&#x6536;&#x3001;&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#x4E0E;&#x64A4;&#x56DE;">&#x7B7E;&#x6536;&#x3001;&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#x4E0E;&#x64A4;&#x56DE;</a></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#签收（receipt）"><span class="toc-text"><a href="#&#x7B7E;&#x6536;&#xFF08;receipt&#xFF09;" class="headerlink" title="&#x7B7E;&#x6536;&#xFF08;receipt&#xFF09;"></a><a href="#&#x7B7E;&#x6536;&#xFF08;receipt&#xFF09;">&#x7B7E;&#x6536;&#xFF08;receipt&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#取消签收（unreceipt）"><span class="toc-text"><a href="#&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#xFF08;unreceipt&#xFF09;" class="headerlink" title="&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#xFF08;unreceipt&#xFF09;"></a><a href="#&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#xFF08;unreceipt&#xFF09;">&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#xFF08;unreceipt&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#撤回（withdraw）"><span class="toc-text"><a href="#&#x64A4;&#x56DE;&#xFF08;withdraw&#xFF09;" class="headerlink" title="&#x64A4;&#x56DE;&#xFF08;withdraw&#xFF09;"></a><a href="#&#x64A4;&#x56DE;&#xFF08;withdraw&#xFF09;">&#x64A4;&#x56DE;&#xFF08;withdraw&#xFF09;</a></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#历史遗留"><span class="toc-text"><a href="#&#x5386;&#x53F2;&#x9057;&#x7559;" class="headerlink" title="&#x5386;&#x53F2;&#x9057;&#x7559;"></a><a href="#&#x5386;&#x53F2;&#x9057;&#x7559;">&#x5386;&#x53F2;&#x9057;&#x7559;</a></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#流转（flow）"><span class="toc-text"><a href="#&#x6D41;&#x8F6C;&#xFF08;flow&#xFF09;" class="headerlink" title="&#x6D41;&#x8F6C;&#xFF08;flow&#xFF09;"></a><a href="#&#x6D41;&#x8F6C;&#xFF08;flow&#xFF09;">&#x6D41;&#x8F6C;&#xFF08;flow&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#仅仅开始（justStart）"><span class="toc-text"><a href="#&#x4EC5;&#x4EC5;&#x5F00;&#x59CB;&#xFF08;justStart&#xFF09;" class="headerlink" title="&#x4EC5;&#x4EC5;&#x5F00;&#x59CB;&#xFF08;justStart&#xFF09;"></a><a href="#&#x4EC5;&#x4EC5;&#x5F00;&#x59CB;&#xFF08;justStart&#xFF09;">&#x4EC5;&#x4EC5;&#x5F00;&#x59CB;&#xFF08;justStart&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开始（start）"><span class="toc-text"><a href="#&#x5F00;&#x59CB;&#xFF08;start&#xFF09;" class="headerlink" title="&#x5F00;&#x59CB;&#xFF08;start&#xFF09;"></a><a href="#&#x5F00;&#x59CB;&#xFF08;start&#xFF09;">&#x5F00;&#x59CB;&#xFF08;start&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动（move）"><span class="toc-text"><a href="#&#x79FB;&#x52A8;&#xFF08;move&#xFF09;" class="headerlink" title="&#x79FB;&#x52A8;&#xFF08;move&#xFF09;"></a><a href="#&#x79FB;&#x52A8;&#xFF08;move&#xFF09;">&#x79FB;&#x52A8;&#xFF08;move&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开始并移动（startMove）"><span class="toc-text"><a href="#&#x5F00;&#x59CB;&#x5E76;&#x79FB;&#x52A8;&#xFF08;startMove&#xFF09;" class="headerlink" title="&#x5F00;&#x59CB;&#x5E76;&#x79FB;&#x52A8;&#xFF08;startMove&#xFF09;"></a><a href="#&#x5F00;&#x59CB;&#x5E76;&#x6D41;&#x8F6C;&#xFF08;startMove&#xFF09;">&#x5F00;&#x59CB;&#x5E76;&#x79FB;&#x52A8;&#xFF08;startMove&#xFF09;</a></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text"><a href="#&#x603B;&#x7ED3;" class="headerlink" title="&#x603B;&#x7ED3;"></a><a href="#&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</a></span></a></li></ol>
 		
@@ -280,9 +280,8 @@
 <p>其中，<code>exeId</code> 和 <code>dealPerson</code> 是必填项。取消签收成功后会显示该环节详细信息，同时这个任务进入无人认领状态，可以被其他用户进行签收，也可被它的来源人撤回。</p>
 <h3 id="撤回（withdraw）"><a href="#撤回（withdraw）" class="headerlink" title="撤回（withdraw）"></a><a href="#撤回（withdraw）">撤回（withdraw）</a></h3><p>撤回是任务的来源人将任务取回的方法，它的 api 格式如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./wfservice/withdraw?taskId=$&#123;此任务前一环节的任务变量ID&#125;</span><br></pre></td></tr></table></figure>
-<p>其中 <code>taskId</code> 是必填项，撤回成功后会显示前一环节详细信息。撤回是一种异步方法，即不处于激活状态的环节发起的操作，所以撤回方需要提供当时保存的 <code>taskId</code>。如我们之前所说，<code>taskId</code> 是业务系统在每次流转返回后都需要自己保存的数据，即为异步方法调用之用。</p>
-<p>并且，撤回的成功还取决于两个条件：任务未被下一个参与者完成，也未被下一个参与者领取，这是符合业务流转的逻辑的。</p>
-<p>最后，撤回不具有回溯性，即如果 A 发任务给 B 然后 B 发任务给 C，如果 B 撤回后，A 无法把任务再撤回到自己这里。</p>
+<p>其中 <code>taskId</code> 是必填项，值为当前最新环节的 <code>taskId</code>，撤回成功后会显示前一环节详细信息。</p>
+<p>注意，您只能从当前最新环节进行撤回。</p>
 <h2 id="历史遗留"><a href="#历史遗留" class="headerlink" title="历史遗留"></a><a href="#历史遗留">历史遗留</a></h2><p>以下 API 曾被开发，但经时间证明它们并非最佳实践因而不再推荐使用。这些 API 一直可用，但不会再增加特性，在此列出并建议使用了它们的用户尽快替换。</p>
 <h3 id="流转（flow）"><a href="#流转（flow）" class="headerlink" title="流转（flow）"></a><a href="#流转（flow）">流转（flow）</a></h3><p><code>flow</code> 是曾经的用于流转的 API ，使用 <code>exeId</code> 做为流转关键参数，它的格式如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">./wfservice/flow?exeId=<span class="number">40013</span></span><br><span class="line">                &amp;dealRole=projectManager</span><br><span class="line">                &amp;dealPerson=ZhangSan</span><br><span class="line">                &amp;formData=&#123;form_data:&#123;endApply:<span class="keyword">false</span>, nextOU:<span class="string">"M"</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
@@ -491,21 +490,21 @@
 
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
+  <strong class="toc-title">Contents</strong>
  
  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#开始与流转"><span class="toc-text"><a href="#&#x5F00;&#x59CB;&#x4E0E;&#x6D41;&#x8F6C;" class="headerlink" title="&#x5F00;&#x59CB;&#x4E0E;&#x6D41;&#x8F6C;"></a><a href="#&#x5F00;&#x59CB;&#x4E0E;&#x6D41;&#x8F6C;">&#x5F00;&#x59CB;&#x4E0E;&#x6D41;&#x8F6C;</a></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#开始（begin）"><span class="toc-text"><a href="#&#x5F00;&#x59CB;&#xFF08;begin&#xFF09;" class="headerlink" title="&#x5F00;&#x59CB;&#xFF08;begin&#xFF09;"></a><a href="#&#x5F00;&#x59CB;&#xFF08;begin&#xFF09;">&#x5F00;&#x59CB;&#xFF08;begin&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流转（complete）"><span class="toc-text"><a href="#&#x6D41;&#x8F6C;&#xFF08;complete&#xFF09;" class="headerlink" title="&#x6D41;&#x8F6C;&#xFF08;complete&#xFF09;"></a><a href="#&#x6D41;&#x8F6C;&#xFF08;complete&#xFF09;">&#x6D41;&#x8F6C;&#xFF08;complete&#xFF09;</a></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#挂起、恢复与终止"><span class="toc-text"><a href="#&#x6302;&#x8D77;&#x3001;&#x6062;&#x590D;&#x4E0E;&#x7EC8;&#x6B62;" class="headerlink" title="&#x6302;&#x8D77;&#x3001;&#x6062;&#x590D;&#x4E0E;&#x7EC8;&#x6B62;"></a><a href="#&#x6302;&#x8D77;&#x3001;&#x6062;&#x590D;&#x4E0E;&#x7EC8;&#x6B62;">&#x6302;&#x8D77;&#x3001;&#x6062;&#x590D;&#x4E0E;&#x7EC8;&#x6B62;</a></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#挂起（suspend）"><span class="toc-text"><a href="#&#x6302;&#x8D77;&#xFF08;suspend&#xFF09;" class="headerlink" title="&#x6302;&#x8D77;&#xFF08;suspend&#xFF09;"></a><a href="#&#x6302;&#x8D77;&#xFF08;suspend&#xFF09;">&#x6302;&#x8D77;&#xFF08;suspend&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#恢复（activate）"><span class="toc-text"><a href="#&#x6062;&#x590D;&#xFF08;activate&#xFF09;" class="headerlink" title="&#x6062;&#x590D;&#xFF08;activate&#xFF09;"></a><a href="#&#x6062;&#x590D;&#xFF08;activate&#xFF09;">&#x6062;&#x590D;&#xFF08;activate&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#终止（terminate）"><span class="toc-text"><a href="#&#x7EC8;&#x6B62;&#xFF08;terminate&#xFF09;" class="headerlink" title="&#x7EC8;&#x6B62;&#xFF08;terminate&#xFF09;"></a><a href="#&#x7EC8;&#x6B62;&#xFF08;terminate&#xFF09;">&#x7EC8;&#x6B62;&#xFF08;terminate&#xFF09;</a></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#签收、取消签收与撤回"><span class="toc-text"><a href="#&#x7B7E;&#x6536;&#x3001;&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#x4E0E;&#x64A4;&#x56DE;" class="headerlink" title="&#x7B7E;&#x6536;&#x3001;&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#x4E0E;&#x64A4;&#x56DE;"></a><a href="#&#x7B7E;&#x6536;&#x3001;&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#x4E0E;&#x64A4;&#x56DE;">&#x7B7E;&#x6536;&#x3001;&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#x4E0E;&#x64A4;&#x56DE;</a></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#签收（receipt）"><span class="toc-text"><a href="#&#x7B7E;&#x6536;&#xFF08;receipt&#xFF09;" class="headerlink" title="&#x7B7E;&#x6536;&#xFF08;receipt&#xFF09;"></a><a href="#&#x7B7E;&#x6536;&#xFF08;receipt&#xFF09;">&#x7B7E;&#x6536;&#xFF08;receipt&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#取消签收（unreceipt）"><span class="toc-text"><a href="#&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#xFF08;unreceipt&#xFF09;" class="headerlink" title="&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#xFF08;unreceipt&#xFF09;"></a><a href="#&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#xFF08;unreceipt&#xFF09;">&#x53D6;&#x6D88;&#x7B7E;&#x6536;&#xFF08;unreceipt&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#撤回（withdraw）"><span class="toc-text"><a href="#&#x64A4;&#x56DE;&#xFF08;withdraw&#xFF09;" class="headerlink" title="&#x64A4;&#x56DE;&#xFF08;withdraw&#xFF09;"></a><a href="#&#x64A4;&#x56DE;&#xFF08;withdraw&#xFF09;">&#x64A4;&#x56DE;&#xFF08;withdraw&#xFF09;</a></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#历史遗留"><span class="toc-text"><a href="#&#x5386;&#x53F2;&#x9057;&#x7559;" class="headerlink" title="&#x5386;&#x53F2;&#x9057;&#x7559;"></a><a href="#&#x5386;&#x53F2;&#x9057;&#x7559;">&#x5386;&#x53F2;&#x9057;&#x7559;</a></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#流转（flow）"><span class="toc-text"><a href="#&#x6D41;&#x8F6C;&#xFF08;flow&#xFF09;" class="headerlink" title="&#x6D41;&#x8F6C;&#xFF08;flow&#xFF09;"></a><a href="#&#x6D41;&#x8F6C;&#xFF08;flow&#xFF09;">&#x6D41;&#x8F6C;&#xFF08;flow&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#仅仅开始（justStart）"><span class="toc-text"><a href="#&#x4EC5;&#x4EC5;&#x5F00;&#x59CB;&#xFF08;justStart&#xFF09;" class="headerlink" title="&#x4EC5;&#x4EC5;&#x5F00;&#x59CB;&#xFF08;justStart&#xFF09;"></a><a href="#&#x4EC5;&#x4EC5;&#x5F00;&#x59CB;&#xFF08;justStart&#xFF09;">&#x4EC5;&#x4EC5;&#x5F00;&#x59CB;&#xFF08;justStart&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开始（start）"><span class="toc-text"><a href="#&#x5F00;&#x59CB;&#xFF08;start&#xFF09;" class="headerlink" title="&#x5F00;&#x59CB;&#xFF08;start&#xFF09;"></a><a href="#&#x5F00;&#x59CB;&#xFF08;start&#xFF09;">&#x5F00;&#x59CB;&#xFF08;start&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动（move）"><span class="toc-text"><a href="#&#x79FB;&#x52A8;&#xFF08;move&#xFF09;" class="headerlink" title="&#x79FB;&#x52A8;&#xFF08;move&#xFF09;"></a><a href="#&#x79FB;&#x52A8;&#xFF08;move&#xFF09;">&#x79FB;&#x52A8;&#xFF08;move&#xFF09;</a></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开始并移动（startMove）"><span class="toc-text"><a href="#&#x5F00;&#x59CB;&#x5E76;&#x79FB;&#x52A8;&#xFF08;startMove&#xFF09;" class="headerlink" title="&#x5F00;&#x59CB;&#x5E76;&#x79FB;&#x52A8;&#xFF08;startMove&#xFF09;"></a><a href="#&#x5F00;&#x59CB;&#x5E76;&#x6D41;&#x8F6C;&#xFF08;startMove&#xFF09;">&#x5F00;&#x59CB;&#x5E76;&#x79FB;&#x52A8;&#xFF08;startMove&#xFF09;</a></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text"><a href="#&#x603B;&#x7ED3;" class="headerlink" title="&#x603B;&#x7ED3;"></a><a href="#&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</a></span></a></li></ol>
  
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
 <aside class="clearfix">
 
   <div class="linkslist">
-  <p class="asidetitle">友情链接</p>
+  <p class="asidetitle">Links</p>
     <ul>
         
     </ul>
@@ -533,7 +532,7 @@
 		
 
 		<!--<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2020 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2021 
 		
 		<a href="/about" target="_blank" title="limeng32">limeng32</a>
 		
@@ -723,7 +722,7 @@ var _hmt = _hmt || [];
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 
